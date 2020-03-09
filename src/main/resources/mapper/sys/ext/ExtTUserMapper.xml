@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.sys.dao.ext.ExtTUserMapper" >
+
+    <sql id="Base_Column_List" >
+        id, nick_name, mobile, password, sort, openId, wechat_name, sex, status, birthday,
+        create_time, update_time, create_user, update_user, version, delete_flag
+    </sql>
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.sys.entity.ext.ExtTUser" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="VARCHAR" />
+        <result column="openId" property="openid" jdbcType="VARCHAR" />
+        <result column="wechat_name" property="wechatName" jdbcType="VARCHAR" />
+        <result column="sex" property="sex" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="birthday" property="birthday" jdbcType="TIMESTAMP" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_user
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="mobile != null and mobile != ''">
+                AND mobile = #{mobile}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                AND nick_name = #{nickName}
+            </if>
+            <if test="key != null and key != ''">
+                AND (
+                mobile like concat("%", #{key}, "%")
+                OR wechat_name like concat("%", #{key}, "%")
+                OR nickName like concat("%", #{key}, "%")
+                )
+            </if>
+        </where>
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_user
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="mobile != null and mobile != ''">
+                AND mobile = #{mobile}
+            </if>
+            <if test="nickName != null and nickName != ''">
+                AND nick_name = #{nickName}
+            </if>
+            <if test="key != null and key != ''">
+                AND (
+                mobile like concat("%", #{key}, "%")
+                OR wechat_name like concat("%", #{key}, "%")
+                OR nickName like concat("%", #{key}, "%")
+                )
+            </if>
+        </where>
+    </select>
+</mapper>

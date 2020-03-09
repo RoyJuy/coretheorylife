@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.purchaser.dao.ext.ExtTPurchaserHealthMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.purchaser.entity.TPurchaserHealth" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT" />
+        <result column="height" property="height" jdbcType="DECIMAL" />
+        <result column="weight" property="weight" jdbcType="DECIMAL" />
+        <result column="target" property="target" jdbcType="INTEGER" />
+        <result column="standard_weight" property="standardWeight" jdbcType="DECIMAL" />
+        <result column="exercise" property="exercise" jdbcType="INTEGER" />
+        <result column="basal_metabolism" property="basalMetabolism" jdbcType="DECIMAL" />
+        <result column="sport_metabolism" property="sportMetabolism" jdbcType="DECIMAL" />
+        <result column="body_fat_rate" property="bodyFatRate" jdbcType="DECIMAL" />
+        <result column="fat_need" property="fatNeed" jdbcType="DECIMAL" />
+        <result column="protein_need" property="proteinNeed" jdbcType="DECIMAL" />
+        <result column="carbohydrate_need" property="carbohydrateNeed" jdbcType="DECIMAL" />
+        <result column="examer" property="examer" jdbcType="BIT" />
+        <result column="dream_weight" property="dreamWeight" jdbcType="DECIMAL" />
+        <result column="kcl_need" property="kclNeed" jdbcType="DECIMAL" />
+        <result column="dream_date" property="dreamDate" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, purchaser_id, height, weight, target, standard_weight, exercise, basal_metabolism,
+        sport_metabolism, body_fat_rate, fat_need, protein_need, carbohydrate_need, examer,
+        dream_weight, kcl_need, dream_date, status, create_time, update_time, create_user,
+        update_user, version, delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_purchaser_health
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND purchaser_id = #{purchaserId}
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="timeFrom != null and timeFrom != null">
+                AND create_time &gt; #{timeFrom}
+            </if>
+            <if test="timeTo != null and timeTo != null">
+                AND create_time &lt; #{timeTo}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_purchaser_health
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND purchaser_id = #{purchaserId}
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="timeFrom != null and timeFrom != null">
+                AND create_time &gt; #{timeFrom}
+            </if>
+            <if test="timeTo != null and timeTo != null">
+                AND create_time &lt; #{timeTo}
+            </if>
+        </where>
+    </select>
+</mapper>

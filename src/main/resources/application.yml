@@ -1,0 +1,62 @@
+management:
+  server:
+    address: 127.0.0.1
+    port: 8000
+    servlet:
+      context-path: /manager
+  endpoint:
+    shutdown:
+      enabled: true
+  endpoints:
+    web:
+      path-mapping:
+        shutdown:
+endpoints:
+  restart:
+    enabled: true
+# 日志配置
+logging:
+  config: classpath:logback-${spring.profiles.active}.xml
+
+# mysql
+spring:
+  # 环境 dev|test|pro
+  profiles:
+    active: test
+    # jackson时间格式化
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  http:
+    charset: UTF-8
+    enabled: true
+    force: true
+
+  redis:
+    open: true  # 是否开启redis缓存  true开启   false关闭
+    database: 0
+    host: 47.101.133.223
+    port: 6379
+    password: ctfp@ss3211234       # 密码（默认为空）
+    timeout: 6000  # 连接超时时长（毫秒）
+    jedis:
+      pool:
+        max-idle: 10
+        min-idle: 5
+        max-wait: -1
+  security:
+    user:
+      name: root
+      password: root123456
+      roles: SUPERUSER
+  servlet:
+    multipart:
+      max-file-size: 2048MB
+      max-request-size: 2048MB
+      enabled: true
+
+# Mybatis配置
+mybatis:
+  mapper-locations: classpath:mapper/**/*.xml
+  configLocation: classpath:mybatis.xml

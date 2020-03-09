@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.sys.dao.TSysVersionMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.sys.entity.TSysVersion" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="version_no" property="versionNo" jdbcType="VARCHAR" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="url" property="url" jdbcType="VARCHAR" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="platform" property="platform" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, version_no, type, url, message, platform, create_time, update_time, create_user, 
+        update_user, version, delete_flag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.coretheorylife.modules.sys.entity.TSysVersionExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_sys_version
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_sys_version
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_sys_version
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.coretheorylife.modules.sys.entity.TSysVersionExample" >
+        delete from t_sys_version
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.coretheorylife.modules.sys.entity.TSysVersion" >
+        insert into t_sys_version (id, version_no, type, 
+            url, message, platform, 
+            create_time, update_time, create_user, 
+            update_user, version, delete_flag
+            )
+        values (#{id,jdbcType=BIGINT}, #{versionNo,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+            #{url,jdbcType=VARCHAR}, #{message,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, 
+            #{updateUser,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.sys.entity.TSysVersion" >
+        insert into t_sys_version
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="versionNo != null" >
+                version_no,
+            </if>
+            <if test="type != null" >
+                type,
+            </if>
+            <if test="url != null" >
+                url,
+            </if>
+            <if test="message != null" >
+                message,
+            </if>
+            <if test="platform != null" >
+                platform,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createUser != null" >
+                create_user,
+            </if>
+            <if test="updateUser != null" >
+                update_user,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="versionNo != null" >
+                #{versionNo,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="url != null" >
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null" >
+                #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="platform != null" >
+                #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.coretheorylife.modules.sys.entity.TSysVersionExample" resultType="java.lang.Integer" >
+        select count(*) from t_sys_version
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_sys_version
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.versionNo != null" >
+                version_no = #{record.versionNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.type != null" >
+                type = #{record.type,jdbcType=INTEGER},
+            </if>
+            <if test="record.url != null" >
+                url = #{record.url,jdbcType=VARCHAR},
+            </if>
+            <if test="record.message != null" >
+                message = #{record.message,jdbcType=VARCHAR},
+            </if>
+            <if test="record.platform != null" >
+                platform = #{record.platform,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUser != null" >
+                create_user = #{record.createUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateUser != null" >
+                update_user = #{record.updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null" >
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_sys_version
+        set id = #{record.id,jdbcType=BIGINT},
+            version_no = #{record.versionNo,jdbcType=VARCHAR},
+            type = #{record.type,jdbcType=INTEGER},
+            url = #{record.url,jdbcType=VARCHAR},
+            message = #{record.message,jdbcType=VARCHAR},
+            platform = #{record.platform,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            create_user = #{record.createUser,jdbcType=BIGINT},
+            update_user = #{record.updateUser,jdbcType=BIGINT},
+            version = #{record.version,jdbcType=INTEGER},
+            delete_flag = #{record.deleteFlag,jdbcType=BIT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.coretheorylife.modules.sys.entity.TSysVersion" >
+        update t_sys_version
+        <set >
+            <if test="versionNo != null" >
+                version_no = #{versionNo,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null" >
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="url != null" >
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="message != null" >
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="platform != null" >
+                platform = #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.coretheorylife.modules.sys.entity.TSysVersion" >
+        update t_sys_version
+        set version_no = #{versionNo,jdbcType=VARCHAR},
+            type = #{type,jdbcType=INTEGER},
+            url = #{url,jdbcType=VARCHAR},
+            message = #{message,jdbcType=VARCHAR},
+            platform = #{platform,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_user = #{createUser,jdbcType=BIGINT},
+            update_user = #{updateUser,jdbcType=BIGINT},
+            version = #{version,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

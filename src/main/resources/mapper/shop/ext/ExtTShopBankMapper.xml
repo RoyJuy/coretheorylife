@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.ext.ExtTShopBankMapper">
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.ext.ExtTShopBank">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="card_number" property="cardNumber" jdbcType="VARCHAR"/>
+        <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+        <result column="card_holder" property="cardHolder" jdbcType="VARCHAR"/>
+        <result column="card_address" property="cardAddress" jdbcType="VARCHAR"/>
+        <result column="default_card" property="defaultCard" jdbcType="BIT"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
+        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, shop_id, card_number, bank_name, card_holder, card_address, default_card, create_time, 
+        update_time, create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_shop_bank
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND shop_id = #{shopId}
+            </if>
+        </where>
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_shop_bank
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND shop_id = #{shopId}
+            </if>
+        </where>
+    </select>
+</mapper>

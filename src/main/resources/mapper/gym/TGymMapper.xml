@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.gym.dao.TGymMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.gym.entity.TGym" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="mobile" property="mobile" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="VARCHAR" />
+        <result column="account_password" property="accountPassword" jdbcType="VARCHAR" />
+        <result column="account_sort" property="accountSort" jdbcType="VARCHAR" />
+        <result column="openId" property="openid" jdbcType="VARCHAR" />
+        <result column="wechat_name" property="wechatName" jdbcType="VARCHAR" />
+        <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="gym_code" property="gymCode" jdbcType="VARCHAR" />
+        <result column="order_phone" property="orderPhone" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="address_detailes" property="addressDetailes" jdbcType="VARCHAR" />
+        <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+        <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+        <result column="announcement" property="announcement" jdbcType="VARCHAR" />
+        <result column="introduction" property="introduction" jdbcType="VARCHAR" />
+        <result column="business_hours" property="businessHours" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, mobile, password, sort, account_password, account_sort, openId, wechat_name, 
+        avatar, status, name, gym_code, order_phone, address, address_detailes, longitude, 
+        latitude, announcement, introduction, business_hours, create_time, update_time, create_user, 
+        update_user, version, delete_flag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.coretheorylife.modules.gym.entity.TGymExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_gym
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_gym
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_gym
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.coretheorylife.modules.gym.entity.TGymExample" >
+        delete from t_gym
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.coretheorylife.modules.gym.entity.TGym" >
+        insert into t_gym (id, mobile, password, 
+            sort, account_password, account_sort, 
+            openId, wechat_name, avatar, 
+            status, name, gym_code, 
+            order_phone, address, address_detailes, 
+            longitude, latitude, announcement, 
+            introduction, business_hours, create_time, 
+            update_time, create_user, update_user, 
+            version, delete_flag)
+        values (#{id,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+            #{sort,jdbcType=VARCHAR}, #{accountPassword,jdbcType=VARCHAR}, #{accountSort,jdbcType=VARCHAR}, 
+            #{openid,jdbcType=VARCHAR}, #{wechatName,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, 
+            #{status,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{gymCode,jdbcType=VARCHAR}, 
+            #{orderPhone,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{addressDetailes,jdbcType=VARCHAR}, 
+            #{longitude,jdbcType=DECIMAL}, #{latitude,jdbcType=DECIMAL}, #{announcement,jdbcType=VARCHAR}, 
+            #{introduction,jdbcType=VARCHAR}, #{businessHours,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateUser,jdbcType=BIGINT}, 
+            #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.gym.entity.TGym" >
+        insert into t_gym
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="mobile != null" >
+                mobile,
+            </if>
+            <if test="password != null" >
+                password,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="accountPassword != null" >
+                account_password,
+            </if>
+            <if test="accountSort != null" >
+                account_sort,
+            </if>
+            <if test="openid != null" >
+                openId,
+            </if>
+            <if test="wechatName != null" >
+                wechat_name,
+            </if>
+            <if test="avatar != null" >
+                avatar,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="gymCode != null" >
+                gym_code,
+            </if>
+            <if test="orderPhone != null" >
+                order_phone,
+            </if>
+            <if test="address != null" >
+                address,
+            </if>
+            <if test="addressDetailes != null" >
+                address_detailes,
+            </if>
+            <if test="longitude != null" >
+                longitude,
+            </if>
+            <if test="latitude != null" >
+                latitude,
+            </if>
+            <if test="announcement != null" >
+                announcement,
+            </if>
+            <if test="introduction != null" >
+                introduction,
+            </if>
+            <if test="businessHours != null" >
+                business_hours,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createUser != null" >
+                create_user,
+            </if>
+            <if test="updateUser != null" >
+                update_user,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="mobile != null" >
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                #{sort,jdbcType=VARCHAR},
+            </if>
+            <if test="accountPassword != null" >
+                #{accountPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="accountSort != null" >
+                #{accountSort,jdbcType=VARCHAR},
+            </if>
+            <if test="openid != null" >
+                #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatName != null" >
+                #{wechatName,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null" >
+                #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gymCode != null" >
+                #{gymCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPhone != null" >
+                #{orderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="addressDetailes != null" >
+                #{addressDetailes,jdbcType=VARCHAR},
+            </if>
+            <if test="longitude != null" >
+                #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="latitude != null" >
+                #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="announcement != null" >
+                #{announcement,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null" >
+                #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="businessHours != null" >
+                #{businessHours,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.coretheorylife.modules.gym.entity.TGymExample" resultType="java.lang.Integer" >
+        select count(*) from t_gym
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_gym
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.mobile != null" >
+                mobile = #{record.mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.password != null" >
+                password = #{record.password,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sort != null" >
+                sort = #{record.sort,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accountPassword != null" >
+                account_password = #{record.accountPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="record.accountSort != null" >
+                account_sort = #{record.accountSort,jdbcType=VARCHAR},
+            </if>
+            <if test="record.openid != null" >
+                openId = #{record.openid,jdbcType=VARCHAR},
+            </if>
+            <if test="record.wechatName != null" >
+                wechat_name = #{record.wechatName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.avatar != null" >
+                avatar = #{record.avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="record.status != null" >
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.name != null" >
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.gymCode != null" >
+                gym_code = #{record.gymCode,jdbcType=VARCHAR},
+            </if>
+            <if test="record.orderPhone != null" >
+                order_phone = #{record.orderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="record.address != null" >
+                address = #{record.address,jdbcType=VARCHAR},
+            </if>
+            <if test="record.addressDetailes != null" >
+                address_detailes = #{record.addressDetailes,jdbcType=VARCHAR},
+            </if>
+            <if test="record.longitude != null" >
+                longitude = #{record.longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.latitude != null" >
+                latitude = #{record.latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.announcement != null" >
+                announcement = #{record.announcement,jdbcType=VARCHAR},
+            </if>
+            <if test="record.introduction != null" >
+                introduction = #{record.introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="record.businessHours != null" >
+                business_hours = #{record.businessHours,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUser != null" >
+                create_user = #{record.createUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateUser != null" >
+                update_user = #{record.updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null" >
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_gym
+        set id = #{record.id,jdbcType=BIGINT},
+            mobile = #{record.mobile,jdbcType=VARCHAR},
+            password = #{record.password,jdbcType=VARCHAR},
+            sort = #{record.sort,jdbcType=VARCHAR},
+            account_password = #{record.accountPassword,jdbcType=VARCHAR},
+            account_sort = #{record.accountSort,jdbcType=VARCHAR},
+            openId = #{record.openid,jdbcType=VARCHAR},
+            wechat_name = #{record.wechatName,jdbcType=VARCHAR},
+            avatar = #{record.avatar,jdbcType=VARCHAR},
+            status = #{record.status,jdbcType=INTEGER},
+            name = #{record.name,jdbcType=VARCHAR},
+            gym_code = #{record.gymCode,jdbcType=VARCHAR},
+            order_phone = #{record.orderPhone,jdbcType=VARCHAR},
+            address = #{record.address,jdbcType=VARCHAR},
+            address_detailes = #{record.addressDetailes,jdbcType=VARCHAR},
+            longitude = #{record.longitude,jdbcType=DECIMAL},
+            latitude = #{record.latitude,jdbcType=DECIMAL},
+            announcement = #{record.announcement,jdbcType=VARCHAR},
+            introduction = #{record.introduction,jdbcType=VARCHAR},
+            business_hours = #{record.businessHours,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            create_user = #{record.createUser,jdbcType=BIGINT},
+            update_user = #{record.updateUser,jdbcType=BIGINT},
+            version = #{record.version,jdbcType=INTEGER},
+            delete_flag = #{record.deleteFlag,jdbcType=BIT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.coretheorylife.modules.gym.entity.TGym" >
+        update t_gym
+        <set >
+            <if test="mobile != null" >
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null" >
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=VARCHAR},
+            </if>
+            <if test="accountPassword != null" >
+                account_password = #{accountPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="accountSort != null" >
+                account_sort = #{accountSort,jdbcType=VARCHAR},
+            </if>
+            <if test="openid != null" >
+                openId = #{openid,jdbcType=VARCHAR},
+            </if>
+            <if test="wechatName != null" >
+                wechat_name = #{wechatName,jdbcType=VARCHAR},
+            </if>
+            <if test="avatar != null" >
+                avatar = #{avatar,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="gymCode != null" >
+                gym_code = #{gymCode,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPhone != null" >
+                order_phone = #{orderPhone,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null" >
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="addressDetailes != null" >
+                address_detailes = #{addressDetailes,jdbcType=VARCHAR},
+            </if>
+            <if test="longitude != null" >
+                longitude = #{longitude,jdbcType=DECIMAL},
+            </if>
+            <if test="latitude != null" >
+                latitude = #{latitude,jdbcType=DECIMAL},
+            </if>
+            <if test="announcement != null" >
+                announcement = #{announcement,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null" >
+                introduction = #{introduction,jdbcType=VARCHAR},
+            </if>
+            <if test="businessHours != null" >
+                business_hours = #{businessHours,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.coretheorylife.modules.gym.entity.TGym" >
+        update t_gym
+        set mobile = #{mobile,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR},
+            sort = #{sort,jdbcType=VARCHAR},
+            account_password = #{accountPassword,jdbcType=VARCHAR},
+            account_sort = #{accountSort,jdbcType=VARCHAR},
+            openId = #{openid,jdbcType=VARCHAR},
+            wechat_name = #{wechatName,jdbcType=VARCHAR},
+            avatar = #{avatar,jdbcType=VARCHAR},
+            status = #{status,jdbcType=INTEGER},
+            name = #{name,jdbcType=VARCHAR},
+            gym_code = #{gymCode,jdbcType=VARCHAR},
+            order_phone = #{orderPhone,jdbcType=VARCHAR},
+            address = #{address,jdbcType=VARCHAR},
+            address_detailes = #{addressDetailes,jdbcType=VARCHAR},
+            longitude = #{longitude,jdbcType=DECIMAL},
+            latitude = #{latitude,jdbcType=DECIMAL},
+            announcement = #{announcement,jdbcType=VARCHAR},
+            introduction = #{introduction,jdbcType=VARCHAR},
+            business_hours = #{businessHours,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_user = #{createUser,jdbcType=BIGINT},
+            update_user = #{updateUser,jdbcType=BIGINT},
+            version = #{version,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.ext.ExtTShopShipLogMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.ext.ExtTShopShipLog" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="order_id" property="orderId" jdbcType="BIGINT" />
+        <result column="shop_order_id" property="shopOrderId" jdbcType="VARCHAR" />
+        <result column="sf_order_id" property="sfOrderId" jdbcType="VARCHAR" />
+        <result column="sf_bill_id" property="sfBillId" jdbcType="VARCHAR" />
+        <result column="push_time" property="pushTime" jdbcType="VARCHAR" />
+        <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+        <result column="delivery_distance_meter" property="deliveryDistanceMeter" jdbcType="DECIMAL" />
+        <result column="weight_gram" property="weightGram" jdbcType="INTEGER" />
+        <result column="start_time" property="startTime" jdbcType="INTEGER" />
+        <result column="expect_time" property="expectTime" jdbcType="INTEGER" />
+        <result column="total_pay_money" property="totalPayMoney" jdbcType="DECIMAL" />
+        <result column="real_pay_money" property="realPayMoney" jdbcType="DECIMAL" />
+        <result column="coupons_total_fee" property="couponsTotalFee" jdbcType="DECIMAL" />
+        <result column="settlement_type" property="settlementType" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, shop_id, order_id, shop_order_id, sf_order_id, sf_bill_id, push_time, total_price, 
+        delivery_distance_meter, weight_gram, start_time, expect_time, total_pay_money, real_pay_money, 
+        coupons_total_fee, settlement_type, status, description, create_time, update_time, 
+        create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_shop_ship_log
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND shop_id = #{shopId}
+            </if>
+            <if test="orderId != null and orderId != ''">
+                AND order_id = #{orderId}
+            </if>
+            <if test="key != null and key != ''">
+                AND (
+                shop_order_id LIKE CONCAT("%", #{key}, "%")
+                OR sf_order_id LIKE CONCAT("%", #{key}, "%")
+                OR sf_bill_id LIKE CONCAT("%", #{key}, "%")
+                )
+            </if>
+        </where>
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_shop_ship_log
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND shop_id = #{shopId}
+            </if>
+            <if test="orderId != null and orderId != ''">
+                AND order_id = #{orderId}
+            </if>
+            <if test="key != null and key != ''">
+                AND (
+                shop_order_id LIKE CONCAT("%", #{key}, "%")
+                OR sf_order_id LIKE CONCAT("%", #{key}, "%")
+                OR sf_bill_id LIKE CONCAT("%", #{key}, "%")
+                )
+            </if>
+        </where>
+    </select>
+
+</mapper>

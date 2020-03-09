@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.purchaser.dao.ext.ExtTPurchaserFavoriteMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.purchaser.entity.ext.ExtTPurchaserFavorite" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+
+        <result column="shopName" property="shopName" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, purchaser_id, shop_id, create_time, update_time, create_user, update_user, version, 
+        delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT tpf.id, tpf.purchaser_id, tpf.shop_id, tpf.create_time, tpf.update_time,
+        tpf.create_user, tpf.update_user, tpf.version,
+        tpf.delete_flag, ts.name AS shopName
+        FROM t_purchaser_favorite AS tpf
+        INNER JOIN t_shop AS ts ON ts.id = tpf.shop_id
+        <where>
+            <if test="deleteFlag != null">
+                tpf.delete_flag = #{deleteFlag}
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND tpf.purchaser_id = #{purchaserId}
+            </if>
+        </where>
+        ORDER BY tpf.update_time DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_purchaser_favorite AS tpf
+        INNER JOIN t_shop AS ts ON ts.id = tpf.shop_id
+        <where>
+            <if test="deleteFlag != null">
+                tpf.delete_flag = #{deleteFlag}
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND tpf.purchaser_id = #{purchaserId}
+            </if>
+        </where>
+    </select>
+</mapper>

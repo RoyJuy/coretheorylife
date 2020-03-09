@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.TShopShipLogMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.TShopShipLog" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="order_id" property="orderId" jdbcType="BIGINT" />
+        <result column="shop_order_id" property="shopOrderId" jdbcType="VARCHAR" />
+        <result column="sf_order_id" property="sfOrderId" jdbcType="VARCHAR" />
+        <result column="sf_bill_id" property="sfBillId" jdbcType="VARCHAR" />
+        <result column="push_time" property="pushTime" jdbcType="VARCHAR" />
+        <result column="total_price" property="totalPrice" jdbcType="DECIMAL" />
+        <result column="delivery_distance_meter" property="deliveryDistanceMeter" jdbcType="DECIMAL" />
+        <result column="weight_gram" property="weightGram" jdbcType="INTEGER" />
+        <result column="start_time" property="startTime" jdbcType="INTEGER" />
+        <result column="expect_time" property="expectTime" jdbcType="INTEGER" />
+        <result column="total_pay_money" property="totalPayMoney" jdbcType="DECIMAL" />
+        <result column="real_pay_money" property="realPayMoney" jdbcType="DECIMAL" />
+        <result column="coupons_total_fee" property="couponsTotalFee" jdbcType="DECIMAL" />
+        <result column="settlement_type" property="settlementType" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, shop_id, order_id, shop_order_id, sf_order_id, sf_bill_id, push_time, total_price, 
+        delivery_distance_meter, weight_gram, start_time, expect_time, total_pay_money, real_pay_money, 
+        coupons_total_fee, settlement_type, status, description, create_time, update_time, 
+        create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.coretheorylife.modules.shop.entity.TShopShipLogExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_shop_ship_log
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_shop_ship_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_shop_ship_log
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.coretheorylife.modules.shop.entity.TShopShipLogExample" >
+        delete from t_shop_ship_log
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.coretheorylife.modules.shop.entity.TShopShipLog" >
+        insert into t_shop_ship_log (id, shop_id, order_id, 
+            shop_order_id, sf_order_id, sf_bill_id, 
+            push_time, total_price, delivery_distance_meter, 
+            weight_gram, start_time, expect_time, 
+            total_pay_money, real_pay_money, coupons_total_fee, 
+            settlement_type, status, description, 
+            create_time, update_time, create_user, 
+            update_user, version, delete_flag
+            )
+        values (#{id,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+            #{shopOrderId,jdbcType=VARCHAR}, #{sfOrderId,jdbcType=VARCHAR}, #{sfBillId,jdbcType=VARCHAR}, 
+            #{pushTime,jdbcType=VARCHAR}, #{totalPrice,jdbcType=DECIMAL}, #{deliveryDistanceMeter,jdbcType=DECIMAL}, 
+            #{weightGram,jdbcType=INTEGER}, #{startTime,jdbcType=INTEGER}, #{expectTime,jdbcType=INTEGER}, 
+            #{totalPayMoney,jdbcType=DECIMAL}, #{realPayMoney,jdbcType=DECIMAL}, #{couponsTotalFee,jdbcType=DECIMAL}, 
+            #{settlementType,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, 
+            #{updateUser,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.shop.entity.TShopShipLog" >
+        insert into t_shop_ship_log
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="shopId != null" >
+                shop_id,
+            </if>
+            <if test="orderId != null" >
+                order_id,
+            </if>
+            <if test="shopOrderId != null" >
+                shop_order_id,
+            </if>
+            <if test="sfOrderId != null" >
+                sf_order_id,
+            </if>
+            <if test="sfBillId != null" >
+                sf_bill_id,
+            </if>
+            <if test="pushTime != null" >
+                push_time,
+            </if>
+            <if test="totalPrice != null" >
+                total_price,
+            </if>
+            <if test="deliveryDistanceMeter != null" >
+                delivery_distance_meter,
+            </if>
+            <if test="weightGram != null" >
+                weight_gram,
+            </if>
+            <if test="startTime != null" >
+                start_time,
+            </if>
+            <if test="expectTime != null" >
+                expect_time,
+            </if>
+            <if test="totalPayMoney != null" >
+                total_pay_money,
+            </if>
+            <if test="realPayMoney != null" >
+                real_pay_money,
+            </if>
+            <if test="couponsTotalFee != null" >
+                coupons_total_fee,
+            </if>
+            <if test="settlementType != null" >
+                settlement_type,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="description != null" >
+                description,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createUser != null" >
+                create_user,
+            </if>
+            <if test="updateUser != null" >
+                update_user,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null" >
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="orderId != null" >
+                #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="shopOrderId != null" >
+                #{shopOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="sfOrderId != null" >
+                #{sfOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="sfBillId != null" >
+                #{sfBillId,jdbcType=VARCHAR},
+            </if>
+            <if test="pushTime != null" >
+                #{pushTime,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice != null" >
+                #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="deliveryDistanceMeter != null" >
+                #{deliveryDistanceMeter,jdbcType=DECIMAL},
+            </if>
+            <if test="weightGram != null" >
+                #{weightGram,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null" >
+                #{startTime,jdbcType=INTEGER},
+            </if>
+            <if test="expectTime != null" >
+                #{expectTime,jdbcType=INTEGER},
+            </if>
+            <if test="totalPayMoney != null" >
+                #{totalPayMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="realPayMoney != null" >
+                #{realPayMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="couponsTotalFee != null" >
+                #{couponsTotalFee,jdbcType=DECIMAL},
+            </if>
+            <if test="settlementType != null" >
+                #{settlementType,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.coretheorylife.modules.shop.entity.TShopShipLogExample" resultType="java.lang.Integer" >
+        select count(*) from t_shop_ship_log
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_shop_ship_log
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.shopId != null" >
+                shop_id = #{record.shopId,jdbcType=BIGINT},
+            </if>
+            <if test="record.orderId != null" >
+                order_id = #{record.orderId,jdbcType=BIGINT},
+            </if>
+            <if test="record.shopOrderId != null" >
+                shop_order_id = #{record.shopOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfOrderId != null" >
+                sf_order_id = #{record.sfOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.sfBillId != null" >
+                sf_bill_id = #{record.sfBillId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.pushTime != null" >
+                push_time = #{record.pushTime,jdbcType=VARCHAR},
+            </if>
+            <if test="record.totalPrice != null" >
+                total_price = #{record.totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.deliveryDistanceMeter != null" >
+                delivery_distance_meter = #{record.deliveryDistanceMeter,jdbcType=DECIMAL},
+            </if>
+            <if test="record.weightGram != null" >
+                weight_gram = #{record.weightGram,jdbcType=INTEGER},
+            </if>
+            <if test="record.startTime != null" >
+                start_time = #{record.startTime,jdbcType=INTEGER},
+            </if>
+            <if test="record.expectTime != null" >
+                expect_time = #{record.expectTime,jdbcType=INTEGER},
+            </if>
+            <if test="record.totalPayMoney != null" >
+                total_pay_money = #{record.totalPayMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="record.realPayMoney != null" >
+                real_pay_money = #{record.realPayMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="record.couponsTotalFee != null" >
+                coupons_total_fee = #{record.couponsTotalFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.settlementType != null" >
+                settlement_type = #{record.settlementType,jdbcType=INTEGER},
+            </if>
+            <if test="record.status != null" >
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.description != null" >
+                description = #{record.description,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUser != null" >
+                create_user = #{record.createUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateUser != null" >
+                update_user = #{record.updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null" >
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_shop_ship_log
+        set id = #{record.id,jdbcType=BIGINT},
+            shop_id = #{record.shopId,jdbcType=BIGINT},
+            order_id = #{record.orderId,jdbcType=BIGINT},
+            shop_order_id = #{record.shopOrderId,jdbcType=VARCHAR},
+            sf_order_id = #{record.sfOrderId,jdbcType=VARCHAR},
+            sf_bill_id = #{record.sfBillId,jdbcType=VARCHAR},
+            push_time = #{record.pushTime,jdbcType=VARCHAR},
+            total_price = #{record.totalPrice,jdbcType=DECIMAL},
+            delivery_distance_meter = #{record.deliveryDistanceMeter,jdbcType=DECIMAL},
+            weight_gram = #{record.weightGram,jdbcType=INTEGER},
+            start_time = #{record.startTime,jdbcType=INTEGER},
+            expect_time = #{record.expectTime,jdbcType=INTEGER},
+            total_pay_money = #{record.totalPayMoney,jdbcType=DECIMAL},
+            real_pay_money = #{record.realPayMoney,jdbcType=DECIMAL},
+            coupons_total_fee = #{record.couponsTotalFee,jdbcType=DECIMAL},
+            settlement_type = #{record.settlementType,jdbcType=INTEGER},
+            status = #{record.status,jdbcType=INTEGER},
+            description = #{record.description,jdbcType=VARCHAR},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            create_user = #{record.createUser,jdbcType=BIGINT},
+            update_user = #{record.updateUser,jdbcType=BIGINT},
+            version = #{record.version,jdbcType=INTEGER},
+            delete_flag = #{record.deleteFlag,jdbcType=BIT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.coretheorylife.modules.shop.entity.TShopShipLog" >
+        update t_shop_ship_log
+        <set >
+            <if test="shopId != null" >
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="orderId != null" >
+                order_id = #{orderId,jdbcType=BIGINT},
+            </if>
+            <if test="shopOrderId != null" >
+                shop_order_id = #{shopOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="sfOrderId != null" >
+                sf_order_id = #{sfOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="sfBillId != null" >
+                sf_bill_id = #{sfBillId,jdbcType=VARCHAR},
+            </if>
+            <if test="pushTime != null" >
+                push_time = #{pushTime,jdbcType=VARCHAR},
+            </if>
+            <if test="totalPrice != null" >
+                total_price = #{totalPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="deliveryDistanceMeter != null" >
+                delivery_distance_meter = #{deliveryDistanceMeter,jdbcType=DECIMAL},
+            </if>
+            <if test="weightGram != null" >
+                weight_gram = #{weightGram,jdbcType=INTEGER},
+            </if>
+            <if test="startTime != null" >
+                start_time = #{startTime,jdbcType=INTEGER},
+            </if>
+            <if test="expectTime != null" >
+                expect_time = #{expectTime,jdbcType=INTEGER},
+            </if>
+            <if test="totalPayMoney != null" >
+                total_pay_money = #{totalPayMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="realPayMoney != null" >
+                real_pay_money = #{realPayMoney,jdbcType=DECIMAL},
+            </if>
+            <if test="couponsTotalFee != null" >
+                coupons_total_fee = #{couponsTotalFee,jdbcType=DECIMAL},
+            </if>
+            <if test="settlementType != null" >
+                settlement_type = #{settlementType,jdbcType=INTEGER},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="description != null" >
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.coretheorylife.modules.shop.entity.TShopShipLog" >
+        update t_shop_ship_log
+        set shop_id = #{shopId,jdbcType=BIGINT},
+            order_id = #{orderId,jdbcType=BIGINT},
+            shop_order_id = #{shopOrderId,jdbcType=VARCHAR},
+            sf_order_id = #{sfOrderId,jdbcType=VARCHAR},
+            sf_bill_id = #{sfBillId,jdbcType=VARCHAR},
+            push_time = #{pushTime,jdbcType=VARCHAR},
+            total_price = #{totalPrice,jdbcType=DECIMAL},
+            delivery_distance_meter = #{deliveryDistanceMeter,jdbcType=DECIMAL},
+            weight_gram = #{weightGram,jdbcType=INTEGER},
+            start_time = #{startTime,jdbcType=INTEGER},
+            expect_time = #{expectTime,jdbcType=INTEGER},
+            total_pay_money = #{totalPayMoney,jdbcType=DECIMAL},
+            real_pay_money = #{realPayMoney,jdbcType=DECIMAL},
+            coupons_total_fee = #{couponsTotalFee,jdbcType=DECIMAL},
+            settlement_type = #{settlementType,jdbcType=INTEGER},
+            status = #{status,jdbcType=INTEGER},
+            description = #{description,jdbcType=VARCHAR},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_user = #{createUser,jdbcType=BIGINT},
+            update_user = #{updateUser,jdbcType=BIGINT},
+            version = #{version,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.purchaser.dao.ext.ExtTPurchaserNotifyMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.purchaser.entity.ext.ExtTPurchaserNotify" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="message_type" property="messageType" jdbcType="INTEGER" />
+        <result column="message_sys" property="messageSys" jdbcType="BIT" />
+        <result column="message_from_shop_id" property="messageFromShopId" jdbcType="BIGINT" />
+        <result column="has_read" property="hasRead" jdbcType="BIT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, purchaser_id, message, message_type, message_sys, message_from_shop_id, has_read,
+        create_time, update_time, create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_purchaser_notify
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND purchaser_id = #{purchaserId}
+            </if>
+            <if test="hasRead != null and hasRead != ''">
+                AND has_read = #{hasRead}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_purchaser_notify
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND purchaser_id = #{purchaserId}
+            </if>
+            <if test="hasRead != null and hasRead != ''">
+                AND has_read = #{hasRead}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.TOrderMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.TOrder" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT" />
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR" />
+        <result column="pay_type" property="payType" jdbcType="INTEGER" />
+        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP" />
+        <result column="remark" property="remark" jdbcType="VARCHAR" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <result column="pay_price" property="payPrice" jdbcType="DECIMAL" />
+        <result column="package_fee" property="packageFee" jdbcType="DECIMAL" />
+        <result column="ship_fee" property="shipFee" jdbcType="DECIMAL" />
+        <result column="ship_platform" property="shipPlatform" jdbcType="INTEGER" />
+        <result column="ship_type" property="shipType" jdbcType="INTEGER" />
+        <result column="ship_person" property="shipPerson" jdbcType="VARCHAR" />
+        <result column="ship_number" property="shipNumber" jdbcType="VARCHAR" />
+        <result column="ship_prefix" property="shipPrefix" jdbcType="VARCHAR" />
+        <result column="ship_suffix" property="shipSuffix" jdbcType="VARCHAR" />
+        <result column="ship_longitude" property="shipLongitude" jdbcType="DECIMAL" />
+        <result column="ship_latitude" property="shipLatitude" jdbcType="DECIMAL" />
+        <result column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR" />
+        <result column="receiver_name" property="receiverName" jdbcType="VARCHAR" />
+        <result column="eat_number" property="eatNumber" jdbcType="INTEGER" />
+        <result column="ship_time" property="shipTime" jdbcType="TIMESTAMP" />
+        <result column="ship_status" property="shipStatus" jdbcType="INTEGER" />
+        <result column="urge_flag" property="urgeFlag" jdbcType="BIT" />
+        <result column="urge_time" property="urgeTime" jdbcType="TIMESTAMP" />
+        <result column="expected_ship_time" property="expectedShipTime" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="discount_fee" property="discountFee" jdbcType="DECIMAL" />
+        <result column="discount_description" property="discountDescription" jdbcType="VARCHAR" />
+        <result column="purchaser_coupon_id" property="purchaserCouponId" jdbcType="BIGINT" />
+        <result column="purchaser_envelope_id" property="purchaserEnvelopeId" jdbcType="BIGINT" />
+        <result column="has_rate" property="hasRate" jdbcType="BIT" />
+        <result column="order_count" property="orderCount" jdbcType="INTEGER" />
+        <result column="pay_timeout" property="payTimeout" jdbcType="INTEGER" />
+        <result column="receiver_timeout" property="receiverTimeout" jdbcType="INTEGER" />
+        <result column="ship_self" property="shipSelf" jdbcType="BIT" />
+        <result column="send_ship_fee" property="sendShipFee" jdbcType="DECIMAL" />
+        <result column="shop_ship_fee" property="shopShipFee" jdbcType="DECIMAL" />
+        <result column="weight" property="weight" jdbcType="INTEGER" />
+        <result column="sf_order_id" property="sfOrderId" jdbcType="VARCHAR" />
+        <result column="ship_distance" property="shipDistance" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, shop_id, purchaser_id, order_no, pay_type, order_time, remark, price, pay_price, 
+        package_fee, ship_fee, ship_platform, ship_type, ship_person, ship_number, ship_prefix, 
+        ship_suffix, ship_longitude, ship_latitude, receiver_mobile, receiver_name, eat_number, 
+        ship_time, ship_status, urge_flag, urge_time, expected_ship_time, status, discount_fee, 
+        discount_description, purchaser_coupon_id, purchaser_envelope_id, has_rate, order_count, 
+        pay_timeout, receiver_timeout, ship_self, send_ship_fee, shop_ship_fee, weight, sf_order_id, 
+        ship_distance, create_time, update_time, create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.coretheorylife.modules.shop.entity.TOrderExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_order
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_order
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_order
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.coretheorylife.modules.shop.entity.TOrderExample" >
+        delete from t_order
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.coretheorylife.modules.shop.entity.TOrder" >
+        insert into t_order (id, shop_id, purchaser_id, 
+            order_no, pay_type, order_time, 
+            remark, price, pay_price, 
+            package_fee, ship_fee, ship_platform, 
+            ship_type, ship_person, ship_number, 
+            ship_prefix, ship_suffix, ship_longitude, 
+            ship_latitude, receiver_mobile, receiver_name, 
+            eat_number, ship_time, ship_status, 
+            urge_flag, urge_time, expected_ship_time, 
+            status, discount_fee, discount_description, 
+            purchaser_coupon_id, purchaser_envelope_id, 
+            has_rate, order_count, pay_timeout, 
+            receiver_timeout, ship_self, send_ship_fee, 
+            shop_ship_fee, weight, sf_order_id, 
+            ship_distance, create_time, update_time, 
+            create_user, update_user, version, 
+            delete_flag)
+        values (#{id,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}, #{purchaserId,jdbcType=BIGINT}, 
+            #{orderNo,jdbcType=VARCHAR}, #{payType,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP}, 
+            #{remark,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{payPrice,jdbcType=DECIMAL}, 
+            #{packageFee,jdbcType=DECIMAL}, #{shipFee,jdbcType=DECIMAL}, #{shipPlatform,jdbcType=INTEGER}, 
+            #{shipType,jdbcType=INTEGER}, #{shipPerson,jdbcType=VARCHAR}, #{shipNumber,jdbcType=VARCHAR}, 
+            #{shipPrefix,jdbcType=VARCHAR}, #{shipSuffix,jdbcType=VARCHAR}, #{shipLongitude,jdbcType=DECIMAL}, 
+            #{shipLatitude,jdbcType=DECIMAL}, #{receiverMobile,jdbcType=VARCHAR}, #{receiverName,jdbcType=VARCHAR}, 
+            #{eatNumber,jdbcType=INTEGER}, #{shipTime,jdbcType=TIMESTAMP}, #{shipStatus,jdbcType=INTEGER}, 
+            #{urgeFlag,jdbcType=BIT}, #{urgeTime,jdbcType=TIMESTAMP}, #{expectedShipTime,jdbcType=TIMESTAMP}, 
+            #{status,jdbcType=INTEGER}, #{discountFee,jdbcType=DECIMAL}, #{discountDescription,jdbcType=VARCHAR}, 
+            #{purchaserCouponId,jdbcType=BIGINT}, #{purchaserEnvelopeId,jdbcType=BIGINT}, 
+            #{hasRate,jdbcType=BIT}, #{orderCount,jdbcType=INTEGER}, #{payTimeout,jdbcType=INTEGER}, 
+            #{receiverTimeout,jdbcType=INTEGER}, #{shipSelf,jdbcType=BIT}, #{sendShipFee,jdbcType=DECIMAL}, 
+            #{shopShipFee,jdbcType=DECIMAL}, #{weight,jdbcType=INTEGER}, #{sfOrderId,jdbcType=VARCHAR}, 
+            #{shipDistance,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+            #{createUser,jdbcType=BIGINT}, #{updateUser,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, 
+            #{deleteFlag,jdbcType=BIT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.shop.entity.TOrder" >
+        insert into t_order
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="shopId != null" >
+                shop_id,
+            </if>
+            <if test="purchaserId != null" >
+                purchaser_id,
+            </if>
+            <if test="orderNo != null" >
+                order_no,
+            </if>
+            <if test="payType != null" >
+                pay_type,
+            </if>
+            <if test="orderTime != null" >
+                order_time,
+            </if>
+            <if test="remark != null" >
+                remark,
+            </if>
+            <if test="price != null" >
+                price,
+            </if>
+            <if test="payPrice != null" >
+                pay_price,
+            </if>
+            <if test="packageFee != null" >
+                package_fee,
+            </if>
+            <if test="shipFee != null" >
+                ship_fee,
+            </if>
+            <if test="shipPlatform != null" >
+                ship_platform,
+            </if>
+            <if test="shipType != null" >
+                ship_type,
+            </if>
+            <if test="shipPerson != null" >
+                ship_person,
+            </if>
+            <if test="shipNumber != null" >
+                ship_number,
+            </if>
+            <if test="shipPrefix != null" >
+                ship_prefix,
+            </if>
+            <if test="shipSuffix != null" >
+                ship_suffix,
+            </if>
+            <if test="shipLongitude != null" >
+                ship_longitude,
+            </if>
+            <if test="shipLatitude != null" >
+                ship_latitude,
+            </if>
+            <if test="receiverMobile != null" >
+                receiver_mobile,
+            </if>
+            <if test="receiverName != null" >
+                receiver_name,
+            </if>
+            <if test="eatNumber != null" >
+                eat_number,
+            </if>
+            <if test="shipTime != null" >
+                ship_time,
+            </if>
+            <if test="shipStatus != null" >
+                ship_status,
+            </if>
+            <if test="urgeFlag != null" >
+                urge_flag,
+            </if>
+            <if test="urgeTime != null" >
+                urge_time,
+            </if>
+            <if test="expectedShipTime != null" >
+                expected_ship_time,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="discountFee != null" >
+                discount_fee,
+            </if>
+            <if test="discountDescription != null" >
+                discount_description,
+            </if>
+            <if test="purchaserCouponId != null" >
+                purchaser_coupon_id,
+            </if>
+            <if test="purchaserEnvelopeId != null" >
+                purchaser_envelope_id,
+            </if>
+            <if test="hasRate != null" >
+                has_rate,
+            </if>
+            <if test="orderCount != null" >
+                order_count,
+            </if>
+            <if test="payTimeout != null" >
+                pay_timeout,
+            </if>
+            <if test="receiverTimeout != null" >
+                receiver_timeout,
+            </if>
+            <if test="shipSelf != null" >
+                ship_self,
+            </if>
+            <if test="sendShipFee != null" >
+                send_ship_fee,
+            </if>
+            <if test="shopShipFee != null" >
+                shop_ship_fee,
+            </if>
+            <if test="weight != null" >
+                weight,
+            </if>
+            <if test="sfOrderId != null" >
+                sf_order_id,
+            </if>
+            <if test="shipDistance != null" >
+                ship_distance,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createUser != null" >
+                create_user,
+            </if>
+            <if test="updateUser != null" >
+                update_user,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null" >
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="purchaserId != null" >
+                #{purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null" >
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="orderTime != null" >
+                #{orderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="payPrice != null" >
+                #{payPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="packageFee != null" >
+                #{packageFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shipFee != null" >
+                #{shipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shipPlatform != null" >
+                #{shipPlatform,jdbcType=INTEGER},
+            </if>
+            <if test="shipType != null" >
+                #{shipType,jdbcType=INTEGER},
+            </if>
+            <if test="shipPerson != null" >
+                #{shipPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="shipNumber != null" >
+                #{shipNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="shipPrefix != null" >
+                #{shipPrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="shipSuffix != null" >
+                #{shipSuffix,jdbcType=VARCHAR},
+            </if>
+            <if test="shipLongitude != null" >
+                #{shipLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="shipLatitude != null" >
+                #{shipLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="receiverMobile != null" >
+                #{receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverName != null" >
+                #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="eatNumber != null" >
+                #{eatNumber,jdbcType=INTEGER},
+            </if>
+            <if test="shipTime != null" >
+                #{shipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipStatus != null" >
+                #{shipStatus,jdbcType=INTEGER},
+            </if>
+            <if test="urgeFlag != null" >
+                #{urgeFlag,jdbcType=BIT},
+            </if>
+            <if test="urgeTime != null" >
+                #{urgeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expectedShipTime != null" >
+                #{expectedShipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="discountFee != null" >
+                #{discountFee,jdbcType=DECIMAL},
+            </if>
+            <if test="discountDescription != null" >
+                #{discountDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaserCouponId != null" >
+                #{purchaserCouponId,jdbcType=BIGINT},
+            </if>
+            <if test="purchaserEnvelopeId != null" >
+                #{purchaserEnvelopeId,jdbcType=BIGINT},
+            </if>
+            <if test="hasRate != null" >
+                #{hasRate,jdbcType=BIT},
+            </if>
+            <if test="orderCount != null" >
+                #{orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="payTimeout != null" >
+                #{payTimeout,jdbcType=INTEGER},
+            </if>
+            <if test="receiverTimeout != null" >
+                #{receiverTimeout,jdbcType=INTEGER},
+            </if>
+            <if test="shipSelf != null" >
+                #{shipSelf,jdbcType=BIT},
+            </if>
+            <if test="sendShipFee != null" >
+                #{sendShipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shopShipFee != null" >
+                #{shopShipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                #{weight,jdbcType=INTEGER},
+            </if>
+            <if test="sfOrderId != null" >
+                #{sfOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="shipDistance != null" >
+                #{shipDistance,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.coretheorylife.modules.shop.entity.TOrderExample" resultType="java.lang.Integer" >
+        select count(*) from t_order
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_order
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.shopId != null" >
+                shop_id = #{record.shopId,jdbcType=BIGINT},
+            </if>
+            <if test="record.purchaserId != null" >
+                purchaser_id = #{record.purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.orderNo != null" >
+                order_no = #{record.orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="record.payType != null" >
+                pay_type = #{record.payType,jdbcType=INTEGER},
+            </if>
+            <if test="record.orderTime != null" >
+                order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.remark != null" >
+                remark = #{record.remark,jdbcType=VARCHAR},
+            </if>
+            <if test="record.price != null" >
+                price = #{record.price,jdbcType=DECIMAL},
+            </if>
+            <if test="record.payPrice != null" >
+                pay_price = #{record.payPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="record.packageFee != null" >
+                package_fee = #{record.packageFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.shipFee != null" >
+                ship_fee = #{record.shipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.shipPlatform != null" >
+                ship_platform = #{record.shipPlatform,jdbcType=INTEGER},
+            </if>
+            <if test="record.shipType != null" >
+                ship_type = #{record.shipType,jdbcType=INTEGER},
+            </if>
+            <if test="record.shipPerson != null" >
+                ship_person = #{record.shipPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shipNumber != null" >
+                ship_number = #{record.shipNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shipPrefix != null" >
+                ship_prefix = #{record.shipPrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shipSuffix != null" >
+                ship_suffix = #{record.shipSuffix,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shipLongitude != null" >
+                ship_longitude = #{record.shipLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.shipLatitude != null" >
+                ship_latitude = #{record.shipLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="record.receiverMobile != null" >
+                receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="record.receiverName != null" >
+                receiver_name = #{record.receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.eatNumber != null" >
+                eat_number = #{record.eatNumber,jdbcType=INTEGER},
+            </if>
+            <if test="record.shipTime != null" >
+                ship_time = #{record.shipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.shipStatus != null" >
+                ship_status = #{record.shipStatus,jdbcType=INTEGER},
+            </if>
+            <if test="record.urgeFlag != null" >
+                urge_flag = #{record.urgeFlag,jdbcType=BIT},
+            </if>
+            <if test="record.urgeTime != null" >
+                urge_time = #{record.urgeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.expectedShipTime != null" >
+                expected_ship_time = #{record.expectedShipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.status != null" >
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.discountFee != null" >
+                discount_fee = #{record.discountFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.discountDescription != null" >
+                discount_description = #{record.discountDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="record.purchaserCouponId != null" >
+                purchaser_coupon_id = #{record.purchaserCouponId,jdbcType=BIGINT},
+            </if>
+            <if test="record.purchaserEnvelopeId != null" >
+                purchaser_envelope_id = #{record.purchaserEnvelopeId,jdbcType=BIGINT},
+            </if>
+            <if test="record.hasRate != null" >
+                has_rate = #{record.hasRate,jdbcType=BIT},
+            </if>
+            <if test="record.orderCount != null" >
+                order_count = #{record.orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="record.payTimeout != null" >
+                pay_timeout = #{record.payTimeout,jdbcType=INTEGER},
+            </if>
+            <if test="record.receiverTimeout != null" >
+                receiver_timeout = #{record.receiverTimeout,jdbcType=INTEGER},
+            </if>
+            <if test="record.shipSelf != null" >
+                ship_self = #{record.shipSelf,jdbcType=BIT},
+            </if>
+            <if test="record.sendShipFee != null" >
+                send_ship_fee = #{record.sendShipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.shopShipFee != null" >
+                shop_ship_fee = #{record.shopShipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="record.weight != null" >
+                weight = #{record.weight,jdbcType=INTEGER},
+            </if>
+            <if test="record.sfOrderId != null" >
+                sf_order_id = #{record.sfOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.shipDistance != null" >
+                ship_distance = #{record.shipDistance,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUser != null" >
+                create_user = #{record.createUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateUser != null" >
+                update_user = #{record.updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null" >
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_order
+        set id = #{record.id,jdbcType=BIGINT},
+            shop_id = #{record.shopId,jdbcType=BIGINT},
+            purchaser_id = #{record.purchaserId,jdbcType=BIGINT},
+            order_no = #{record.orderNo,jdbcType=VARCHAR},
+            pay_type = #{record.payType,jdbcType=INTEGER},
+            order_time = #{record.orderTime,jdbcType=TIMESTAMP},
+            remark = #{record.remark,jdbcType=VARCHAR},
+            price = #{record.price,jdbcType=DECIMAL},
+            pay_price = #{record.payPrice,jdbcType=DECIMAL},
+            package_fee = #{record.packageFee,jdbcType=DECIMAL},
+            ship_fee = #{record.shipFee,jdbcType=DECIMAL},
+            ship_platform = #{record.shipPlatform,jdbcType=INTEGER},
+            ship_type = #{record.shipType,jdbcType=INTEGER},
+            ship_person = #{record.shipPerson,jdbcType=VARCHAR},
+            ship_number = #{record.shipNumber,jdbcType=VARCHAR},
+            ship_prefix = #{record.shipPrefix,jdbcType=VARCHAR},
+            ship_suffix = #{record.shipSuffix,jdbcType=VARCHAR},
+            ship_longitude = #{record.shipLongitude,jdbcType=DECIMAL},
+            ship_latitude = #{record.shipLatitude,jdbcType=DECIMAL},
+            receiver_mobile = #{record.receiverMobile,jdbcType=VARCHAR},
+            receiver_name = #{record.receiverName,jdbcType=VARCHAR},
+            eat_number = #{record.eatNumber,jdbcType=INTEGER},
+            ship_time = #{record.shipTime,jdbcType=TIMESTAMP},
+            ship_status = #{record.shipStatus,jdbcType=INTEGER},
+            urge_flag = #{record.urgeFlag,jdbcType=BIT},
+            urge_time = #{record.urgeTime,jdbcType=TIMESTAMP},
+            expected_ship_time = #{record.expectedShipTime,jdbcType=TIMESTAMP},
+            status = #{record.status,jdbcType=INTEGER},
+            discount_fee = #{record.discountFee,jdbcType=DECIMAL},
+            discount_description = #{record.discountDescription,jdbcType=VARCHAR},
+            purchaser_coupon_id = #{record.purchaserCouponId,jdbcType=BIGINT},
+            purchaser_envelope_id = #{record.purchaserEnvelopeId,jdbcType=BIGINT},
+            has_rate = #{record.hasRate,jdbcType=BIT},
+            order_count = #{record.orderCount,jdbcType=INTEGER},
+            pay_timeout = #{record.payTimeout,jdbcType=INTEGER},
+            receiver_timeout = #{record.receiverTimeout,jdbcType=INTEGER},
+            ship_self = #{record.shipSelf,jdbcType=BIT},
+            send_ship_fee = #{record.sendShipFee,jdbcType=DECIMAL},
+            shop_ship_fee = #{record.shopShipFee,jdbcType=DECIMAL},
+            weight = #{record.weight,jdbcType=INTEGER},
+            sf_order_id = #{record.sfOrderId,jdbcType=VARCHAR},
+            ship_distance = #{record.shipDistance,jdbcType=INTEGER},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            create_user = #{record.createUser,jdbcType=BIGINT},
+            update_user = #{record.updateUser,jdbcType=BIGINT},
+            version = #{record.version,jdbcType=INTEGER},
+            delete_flag = #{record.deleteFlag,jdbcType=BIT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.coretheorylife.modules.shop.entity.TOrder" >
+        update t_order
+        <set >
+            <if test="shopId != null" >
+                shop_id = #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="purchaserId != null" >
+                purchaser_id = #{purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null" >
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null" >
+                pay_type = #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="orderTime != null" >
+                order_time = #{orderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null" >
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null" >
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="payPrice != null" >
+                pay_price = #{payPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="packageFee != null" >
+                package_fee = #{packageFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shipFee != null" >
+                ship_fee = #{shipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shipPlatform != null" >
+                ship_platform = #{shipPlatform,jdbcType=INTEGER},
+            </if>
+            <if test="shipType != null" >
+                ship_type = #{shipType,jdbcType=INTEGER},
+            </if>
+            <if test="shipPerson != null" >
+                ship_person = #{shipPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="shipNumber != null" >
+                ship_number = #{shipNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="shipPrefix != null" >
+                ship_prefix = #{shipPrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="shipSuffix != null" >
+                ship_suffix = #{shipSuffix,jdbcType=VARCHAR},
+            </if>
+            <if test="shipLongitude != null" >
+                ship_longitude = #{shipLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="shipLatitude != null" >
+                ship_latitude = #{shipLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="receiverMobile != null" >
+                receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverName != null" >
+                receiver_name = #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="eatNumber != null" >
+                eat_number = #{eatNumber,jdbcType=INTEGER},
+            </if>
+            <if test="shipTime != null" >
+                ship_time = #{shipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipStatus != null" >
+                ship_status = #{shipStatus,jdbcType=INTEGER},
+            </if>
+            <if test="urgeFlag != null" >
+                urge_flag = #{urgeFlag,jdbcType=BIT},
+            </if>
+            <if test="urgeTime != null" >
+                urge_time = #{urgeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expectedShipTime != null" >
+                expected_ship_time = #{expectedShipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="discountFee != null" >
+                discount_fee = #{discountFee,jdbcType=DECIMAL},
+            </if>
+            <if test="discountDescription != null" >
+                discount_description = #{discountDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaserCouponId != null" >
+                purchaser_coupon_id = #{purchaserCouponId,jdbcType=BIGINT},
+            </if>
+            <if test="purchaserEnvelopeId != null" >
+                purchaser_envelope_id = #{purchaserEnvelopeId,jdbcType=BIGINT},
+            </if>
+            <if test="hasRate != null" >
+                has_rate = #{hasRate,jdbcType=BIT},
+            </if>
+            <if test="orderCount != null" >
+                order_count = #{orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="payTimeout != null" >
+                pay_timeout = #{payTimeout,jdbcType=INTEGER},
+            </if>
+            <if test="receiverTimeout != null" >
+                receiver_timeout = #{receiverTimeout,jdbcType=INTEGER},
+            </if>
+            <if test="shipSelf != null" >
+                ship_self = #{shipSelf,jdbcType=BIT},
+            </if>
+            <if test="sendShipFee != null" >
+                send_ship_fee = #{sendShipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shopShipFee != null" >
+                shop_ship_fee = #{shopShipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                weight = #{weight,jdbcType=INTEGER},
+            </if>
+            <if test="sfOrderId != null" >
+                sf_order_id = #{sfOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="shipDistance != null" >
+                ship_distance = #{shipDistance,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.coretheorylife.modules.shop.entity.TOrder" >
+        update t_order
+        set shop_id = #{shopId,jdbcType=BIGINT},
+            purchaser_id = #{purchaserId,jdbcType=BIGINT},
+            order_no = #{orderNo,jdbcType=VARCHAR},
+            pay_type = #{payType,jdbcType=INTEGER},
+            order_time = #{orderTime,jdbcType=TIMESTAMP},
+            remark = #{remark,jdbcType=VARCHAR},
+            price = #{price,jdbcType=DECIMAL},
+            pay_price = #{payPrice,jdbcType=DECIMAL},
+            package_fee = #{packageFee,jdbcType=DECIMAL},
+            ship_fee = #{shipFee,jdbcType=DECIMAL},
+            ship_platform = #{shipPlatform,jdbcType=INTEGER},
+            ship_type = #{shipType,jdbcType=INTEGER},
+            ship_person = #{shipPerson,jdbcType=VARCHAR},
+            ship_number = #{shipNumber,jdbcType=VARCHAR},
+            ship_prefix = #{shipPrefix,jdbcType=VARCHAR},
+            ship_suffix = #{shipSuffix,jdbcType=VARCHAR},
+            ship_longitude = #{shipLongitude,jdbcType=DECIMAL},
+            ship_latitude = #{shipLatitude,jdbcType=DECIMAL},
+            receiver_mobile = #{receiverMobile,jdbcType=VARCHAR},
+            receiver_name = #{receiverName,jdbcType=VARCHAR},
+            eat_number = #{eatNumber,jdbcType=INTEGER},
+            ship_time = #{shipTime,jdbcType=TIMESTAMP},
+            ship_status = #{shipStatus,jdbcType=INTEGER},
+            urge_flag = #{urgeFlag,jdbcType=BIT},
+            urge_time = #{urgeTime,jdbcType=TIMESTAMP},
+            expected_ship_time = #{expectedShipTime,jdbcType=TIMESTAMP},
+            status = #{status,jdbcType=INTEGER},
+            discount_fee = #{discountFee,jdbcType=DECIMAL},
+            discount_description = #{discountDescription,jdbcType=VARCHAR},
+            purchaser_coupon_id = #{purchaserCouponId,jdbcType=BIGINT},
+            purchaser_envelope_id = #{purchaserEnvelopeId,jdbcType=BIGINT},
+            has_rate = #{hasRate,jdbcType=BIT},
+            order_count = #{orderCount,jdbcType=INTEGER},
+            pay_timeout = #{payTimeout,jdbcType=INTEGER},
+            receiver_timeout = #{receiverTimeout,jdbcType=INTEGER},
+            ship_self = #{shipSelf,jdbcType=BIT},
+            send_ship_fee = #{sendShipFee,jdbcType=DECIMAL},
+            shop_ship_fee = #{shopShipFee,jdbcType=DECIMAL},
+            weight = #{weight,jdbcType=INTEGER},
+            sf_order_id = #{sfOrderId,jdbcType=VARCHAR},
+            ship_distance = #{shipDistance,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_user = #{createUser,jdbcType=BIGINT},
+            update_user = #{updateUser,jdbcType=BIGINT},
+            version = #{version,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.purchaser.dao.TPurchaserNotifyMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.purchaser.entity.TPurchaserNotify" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT" />
+        <result column="message" property="message" jdbcType="VARCHAR" />
+        <result column="message_type" property="messageType" jdbcType="INTEGER" />
+        <result column="message_sys" property="messageSys" jdbcType="BIT" />
+        <result column="message_from_shop_id" property="messageFromShopId" jdbcType="BIGINT" />
+        <result column="has_read" property="hasRead" jdbcType="BIT" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, purchaser_id, message, message_type, message_sys, message_from_shop_id, has_read, 
+        create_time, update_time, create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserNotifyExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_purchaser_notify
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_purchaser_notify
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_purchaser_notify
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserNotifyExample" >
+        delete from t_purchaser_notify
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserNotify" >
+        insert into t_purchaser_notify (id, purchaser_id, message, 
+            message_type, message_sys, message_from_shop_id, 
+            has_read, create_time, update_time, 
+            create_user, update_user, version, 
+            delete_flag)
+        values (#{id,jdbcType=BIGINT}, #{purchaserId,jdbcType=BIGINT}, #{message,jdbcType=VARCHAR}, 
+            #{messageType,jdbcType=INTEGER}, #{messageSys,jdbcType=BIT}, #{messageFromShopId,jdbcType=BIGINT}, 
+            #{hasRead,jdbcType=BIT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+            #{createUser,jdbcType=BIGINT}, #{updateUser,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, 
+            #{deleteFlag,jdbcType=BIT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserNotify" >
+        insert into t_purchaser_notify
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="purchaserId != null" >
+                purchaser_id,
+            </if>
+            <if test="message != null" >
+                message,
+            </if>
+            <if test="messageType != null" >
+                message_type,
+            </if>
+            <if test="messageSys != null" >
+                message_sys,
+            </if>
+            <if test="messageFromShopId != null" >
+                message_from_shop_id,
+            </if>
+            <if test="hasRead != null" >
+                has_read,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createUser != null" >
+                create_user,
+            </if>
+            <if test="updateUser != null" >
+                update_user,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="purchaserId != null" >
+                #{purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="message != null" >
+                #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="messageType != null" >
+                #{messageType,jdbcType=INTEGER},
+            </if>
+            <if test="messageSys != null" >
+                #{messageSys,jdbcType=BIT},
+            </if>
+            <if test="messageFromShopId != null" >
+                #{messageFromShopId,jdbcType=BIGINT},
+            </if>
+            <if test="hasRead != null" >
+                #{hasRead,jdbcType=BIT},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserNotifyExample" resultType="java.lang.Integer" >
+        select count(*) from t_purchaser_notify
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_purchaser_notify
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.purchaserId != null" >
+                purchaser_id = #{record.purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.message != null" >
+                message = #{record.message,jdbcType=VARCHAR},
+            </if>
+            <if test="record.messageType != null" >
+                message_type = #{record.messageType,jdbcType=INTEGER},
+            </if>
+            <if test="record.messageSys != null" >
+                message_sys = #{record.messageSys,jdbcType=BIT},
+            </if>
+            <if test="record.messageFromShopId != null" >
+                message_from_shop_id = #{record.messageFromShopId,jdbcType=BIGINT},
+            </if>
+            <if test="record.hasRead != null" >
+                has_read = #{record.hasRead,jdbcType=BIT},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUser != null" >
+                create_user = #{record.createUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateUser != null" >
+                update_user = #{record.updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null" >
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_purchaser_notify
+        set id = #{record.id,jdbcType=BIGINT},
+            purchaser_id = #{record.purchaserId,jdbcType=BIGINT},
+            message = #{record.message,jdbcType=VARCHAR},
+            message_type = #{record.messageType,jdbcType=INTEGER},
+            message_sys = #{record.messageSys,jdbcType=BIT},
+            message_from_shop_id = #{record.messageFromShopId,jdbcType=BIGINT},
+            has_read = #{record.hasRead,jdbcType=BIT},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            create_user = #{record.createUser,jdbcType=BIGINT},
+            update_user = #{record.updateUser,jdbcType=BIGINT},
+            version = #{record.version,jdbcType=INTEGER},
+            delete_flag = #{record.deleteFlag,jdbcType=BIT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserNotify" >
+        update t_purchaser_notify
+        <set >
+            <if test="purchaserId != null" >
+                purchaser_id = #{purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="message != null" >
+                message = #{message,jdbcType=VARCHAR},
+            </if>
+            <if test="messageType != null" >
+                message_type = #{messageType,jdbcType=INTEGER},
+            </if>
+            <if test="messageSys != null" >
+                message_sys = #{messageSys,jdbcType=BIT},
+            </if>
+            <if test="messageFromShopId != null" >
+                message_from_shop_id = #{messageFromShopId,jdbcType=BIGINT},
+            </if>
+            <if test="hasRead != null" >
+                has_read = #{hasRead,jdbcType=BIT},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserNotify" >
+        update t_purchaser_notify
+        set purchaser_id = #{purchaserId,jdbcType=BIGINT},
+            message = #{message,jdbcType=VARCHAR},
+            message_type = #{messageType,jdbcType=INTEGER},
+            message_sys = #{messageSys,jdbcType=BIT},
+            message_from_shop_id = #{messageFromShopId,jdbcType=BIGINT},
+            has_read = #{hasRead,jdbcType=BIT},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_user = #{createUser,jdbcType=BIGINT},
+            update_user = #{updateUser,jdbcType=BIGINT},
+            version = #{version,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

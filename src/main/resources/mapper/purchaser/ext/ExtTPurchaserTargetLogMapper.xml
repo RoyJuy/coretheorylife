@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.purchaser.dao.ext.ExtTPurchaserTargetLogMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.purchaser.entity.ext.ExtTPurchaserTargetLog" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT" />
+        <result column="target_id" property="targetId" jdbcType="BIGINT" />
+        <result column="target_time" property="targetTime" jdbcType="DATE" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, purchaser_id, target_id, target_time, create_time, update_time, create_user, 
+        update_user, version, delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_purchaser_target_log
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="targetId != null and targetId != ''">
+                AND target_id = #{targetId}
+            </if>
+            <if test="timeFrom != null and timeFrom != ''">
+                AND target_time &gt;= #{timeFrom}
+            </if>
+            <if test="timeTo != null and timeTo != ''">
+                AND target_time &lt;= #{timeTo}
+            </if>
+        </where>
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_purchaser_target_log
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="targetId != null and targetId != ''">
+                AND target_id = #{targetId}
+            </if>
+            <if test="timeFrom != null and timeFrom != ''">
+                AND target_time &gt;= #{timeFrom}
+            </if>
+            <if test="timeTo != null and timeTo != ''">
+                AND target_time &lt;= #{timeTo}
+            </if>
+        </where>
+    </select>
+</mapper>

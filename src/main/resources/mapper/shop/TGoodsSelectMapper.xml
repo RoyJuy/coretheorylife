@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.TGoodsSelectMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.TGoodsSelect" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="goods_label_id" property="goodsLabelId" jdbcType="BIGINT" />
+        <result column="goods_nutrition_id" property="goodsNutritionId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="weight" property="weight" jdbcType="INTEGER" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <result column="protein" property="protein" jdbcType="DECIMAL" />
+        <result column="carbohydrate" property="carbohydrate" jdbcType="DECIMAL" />
+        <result column="adipose" property="adipose" jdbcType="DECIMAL" />
+        <result column="kacl" property="kacl" jdbcType="DECIMAL" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, goods_label_id, goods_nutrition_id, name, weight, sort, price, protein, carbohydrate, 
+        adipose, kacl, create_time, update_time, create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.coretheorylife.modules.shop.entity.TGoodsSelectExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_goods_select
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_goods_select
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_goods_select
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.coretheorylife.modules.shop.entity.TGoodsSelectExample" >
+        delete from t_goods_select
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.coretheorylife.modules.shop.entity.TGoodsSelect" >
+        insert into t_goods_select (id, goods_label_id, goods_nutrition_id, 
+            name, weight, sort, 
+            price, protein, carbohydrate, 
+            adipose, kacl, create_time, 
+            update_time, create_user, update_user, 
+            version, delete_flag)
+        values (#{id,jdbcType=BIGINT}, #{goodsLabelId,jdbcType=BIGINT}, #{goodsNutritionId,jdbcType=BIGINT}, 
+            #{name,jdbcType=VARCHAR}, #{weight,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
+            #{price,jdbcType=DECIMAL}, #{protein,jdbcType=DECIMAL}, #{carbohydrate,jdbcType=DECIMAL}, 
+            #{adipose,jdbcType=DECIMAL}, #{kacl,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+            #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, #{updateUser,jdbcType=BIGINT}, 
+            #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.shop.entity.TGoodsSelect" >
+        insert into t_goods_select
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="goodsLabelId != null" >
+                goods_label_id,
+            </if>
+            <if test="goodsNutritionId != null" >
+                goods_nutrition_id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="weight != null" >
+                weight,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="price != null" >
+                price,
+            </if>
+            <if test="protein != null" >
+                protein,
+            </if>
+            <if test="carbohydrate != null" >
+                carbohydrate,
+            </if>
+            <if test="adipose != null" >
+                adipose,
+            </if>
+            <if test="kacl != null" >
+                kacl,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createUser != null" >
+                create_user,
+            </if>
+            <if test="updateUser != null" >
+                update_user,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="goodsLabelId != null" >
+                #{goodsLabelId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsNutritionId != null" >
+                #{goodsNutritionId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null" >
+                #{weight,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null" >
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="protein != null" >
+                #{protein,jdbcType=DECIMAL},
+            </if>
+            <if test="carbohydrate != null" >
+                #{carbohydrate,jdbcType=DECIMAL},
+            </if>
+            <if test="adipose != null" >
+                #{adipose,jdbcType=DECIMAL},
+            </if>
+            <if test="kacl != null" >
+                #{kacl,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.coretheorylife.modules.shop.entity.TGoodsSelectExample" resultType="java.lang.Integer" >
+        select count(*) from t_goods_select
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_goods_select
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.goodsLabelId != null" >
+                goods_label_id = #{record.goodsLabelId,jdbcType=BIGINT},
+            </if>
+            <if test="record.goodsNutritionId != null" >
+                goods_nutrition_id = #{record.goodsNutritionId,jdbcType=BIGINT},
+            </if>
+            <if test="record.name != null" >
+                name = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.weight != null" >
+                weight = #{record.weight,jdbcType=INTEGER},
+            </if>
+            <if test="record.sort != null" >
+                sort = #{record.sort,jdbcType=INTEGER},
+            </if>
+            <if test="record.price != null" >
+                price = #{record.price,jdbcType=DECIMAL},
+            </if>
+            <if test="record.protein != null" >
+                protein = #{record.protein,jdbcType=DECIMAL},
+            </if>
+            <if test="record.carbohydrate != null" >
+                carbohydrate = #{record.carbohydrate,jdbcType=DECIMAL},
+            </if>
+            <if test="record.adipose != null" >
+                adipose = #{record.adipose,jdbcType=DECIMAL},
+            </if>
+            <if test="record.kacl != null" >
+                kacl = #{record.kacl,jdbcType=DECIMAL},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUser != null" >
+                create_user = #{record.createUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateUser != null" >
+                update_user = #{record.updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null" >
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_goods_select
+        set id = #{record.id,jdbcType=BIGINT},
+            goods_label_id = #{record.goodsLabelId,jdbcType=BIGINT},
+            goods_nutrition_id = #{record.goodsNutritionId,jdbcType=BIGINT},
+            name = #{record.name,jdbcType=VARCHAR},
+            weight = #{record.weight,jdbcType=INTEGER},
+            sort = #{record.sort,jdbcType=INTEGER},
+            price = #{record.price,jdbcType=DECIMAL},
+            protein = #{record.protein,jdbcType=DECIMAL},
+            carbohydrate = #{record.carbohydrate,jdbcType=DECIMAL},
+            adipose = #{record.adipose,jdbcType=DECIMAL},
+            kacl = #{record.kacl,jdbcType=DECIMAL},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            create_user = #{record.createUser,jdbcType=BIGINT},
+            update_user = #{record.updateUser,jdbcType=BIGINT},
+            version = #{record.version,jdbcType=INTEGER},
+            delete_flag = #{record.deleteFlag,jdbcType=BIT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.coretheorylife.modules.shop.entity.TGoodsSelect" >
+        update t_goods_select
+        <set >
+            <if test="goodsLabelId != null" >
+                goods_label_id = #{goodsLabelId,jdbcType=BIGINT},
+            </if>
+            <if test="goodsNutritionId != null" >
+                goods_nutrition_id = #{goodsNutritionId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="weight != null" >
+                weight = #{weight,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="price != null" >
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="protein != null" >
+                protein = #{protein,jdbcType=DECIMAL},
+            </if>
+            <if test="carbohydrate != null" >
+                carbohydrate = #{carbohydrate,jdbcType=DECIMAL},
+            </if>
+            <if test="adipose != null" >
+                adipose = #{adipose,jdbcType=DECIMAL},
+            </if>
+            <if test="kacl != null" >
+                kacl = #{kacl,jdbcType=DECIMAL},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.coretheorylife.modules.shop.entity.TGoodsSelect" >
+        update t_goods_select
+        set goods_label_id = #{goodsLabelId,jdbcType=BIGINT},
+            goods_nutrition_id = #{goodsNutritionId,jdbcType=BIGINT},
+            name = #{name,jdbcType=VARCHAR},
+            weight = #{weight,jdbcType=INTEGER},
+            sort = #{sort,jdbcType=INTEGER},
+            price = #{price,jdbcType=DECIMAL},
+            protein = #{protein,jdbcType=DECIMAL},
+            carbohydrate = #{carbohydrate,jdbcType=DECIMAL},
+            adipose = #{adipose,jdbcType=DECIMAL},
+            kacl = #{kacl,jdbcType=DECIMAL},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_user = #{createUser,jdbcType=BIGINT},
+            update_user = #{updateUser,jdbcType=BIGINT},
+            version = #{version,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

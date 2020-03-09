@@ -1,0 +1,121 @@
+package com.coretheorylife.modules.purchaser.vo;
+
+import javax.validation.constraints.*;
+import java.math.BigDecimal;
+import java.util.Date;
+
+/**
+ * 
+ * 
+ * @author wcyong
+ * 
+ * @date 2019-11-28
+ */
+public class TPurchaserHealthCVO {
+    /**
+     * 身高cm
+     */
+    @NotNull(message = "身高不能为空")
+    @DecimalMax(value = "500", message = "暂时不服务超过5米的巨人")
+    @DecimalMin(value = "10", message = "请认真填写身高(cm)")
+    private BigDecimal height;
+    /**
+     * 体重kg
+     */
+    @NotNull(message = "体重不能为空")
+    @DecimalMax(value = "1000", message = "暂时不服务超过1吨的巨人")
+    @DecimalMin(value = "10", message = "请认真填写体重(kg)")
+    private BigDecimal weight;
+
+//    /**
+//     * 目标类型 0-未知 1-减脂 2-增肌 3-维持现状
+//     */
+//    @Min(value = 1, message = "目标超出取值范围")
+//    @Max(value = 3, message = "目标超出取值范围")
+//    @NotNull(message = "目标不能为空")
+//    private Integer target;
+//
+//    /**
+//     * 运动量 0-未知 1-久坐人群 2-日常活动 3-每周1-2次运动 4-每周3-4次运动 5-每周运动5-7次
+//     */
+//    @NotNull(message = "运动量不能为空")
+//    @Min(value = 1, message = "目标超出取值范围")
+//    @Max(value = 5, message = "目标超出取值范围")
+//    private Integer exercise;
+
+//    /**
+//     * 基础代谢
+//     */
+//    @DecimalMax(value = "10000", message = "基础代谢太旺盛啦")
+//    @DecimalMin(value = "0", message = "请认真填写基础代谢（Kcal）")
+//    private BigDecimal basalMetabolism;
+
+//    /**
+//     * 体脂
+//     */
+//    @DecimalMax(value = "1", message = "请认真填写体脂(0-1)")
+//    @DecimalMin(value = "0", message = "请认真填写体脂(0-1)")
+//    private BigDecimal bodyFatRate;
+
+    @NotNull(message = "生日不能为空")
+    private Date birthday;
+
+    @NotNull(message = "性别不能为空")
+    @Min(value = 1, message = "1男2女")
+    @Max(value = 2, message = "1男2女")
+    private Integer sex;
+
+//    /**
+//     * 是体测用户
+//     */
+//    @NotNull(message = "是不是体测用户不能为空")
+//    private Boolean examer;
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+
+    public BigDecimal getHeight() {
+        return height;
+    }
+
+    public void setHeight(BigDecimal height) {
+        this.height = height;
+    }
+
+    public BigDecimal getWeight() {
+        return weight;
+    }
+
+    public void setWeight(BigDecimal weight) {
+        this.weight = weight;
+    }
+
+//    public Integer getTarget() {
+//        return target;
+//    }
+//
+//    public void setTarget(Integer target) {
+//        this.target = target;
+//    }
+//
+//    public Integer getExercise() {
+//        return exercise;
+//    }
+//
+//    public void setExercise(Integer exercise) {
+//        this.exercise = exercise;
+//    }
+
+    public Integer getSex() {
+        return sex;
+    }
+
+    public void setSex(Integer sex) {
+        this.sex = sex;
+    }
+}

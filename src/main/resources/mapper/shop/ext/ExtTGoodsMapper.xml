@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.ext.ExtTGoodsMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.ext.ExtTGoods" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="shop_type_id" property="shopTypeId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+        <result column="pic" property="pic" jdbcType="VARCHAR" />
+        <result column="description" property="description" jdbcType="VARCHAR" />
+        <result column="characteristic" property="characteristic" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="min_buy" property="minBuy" jdbcType="INTEGER" />
+        <result column="unit" property="unit" jdbcType="VARCHAR" />
+        <result column="sell_time" property="sellTime" jdbcType="VARCHAR" />
+        <result column="package_fee" property="packageFee" jdbcType="DECIMAL" />
+        <result column="now_stock" property="nowStock" jdbcType="INTEGER" />
+        <result column="max_stock" property="maxStock" jdbcType="INTEGER" />
+        <result column="discount_rate" property="discountRate" jdbcType="DECIMAL" />
+        <result column="max_discount" property="maxDiscount" jdbcType="INTEGER" />
+        <result column="price" property="price" jdbcType="DECIMAL" />
+        <result column="protein" property="protein" jdbcType="DECIMAL" />
+        <result column="carbohydrate" property="carbohydrate" jdbcType="DECIMAL" />
+        <result column="adipose" property="adipose" jdbcType="DECIMAL" />
+        <result column="kacl" property="kacl" jdbcType="DECIMAL" />
+        <result column="weight" property="weight" jdbcType="INTEGER" />
+        <result column="month_sell" property="monthSell" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+    <resultMap id="goodsSelect" type="com.coretheorylife.modules.shop.entity.ext.ExtTGoods">
+        <id column="tg_id" property="id" jdbcType="BIGINT"/>
+        <result column="tg_shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="tg_shop_type_id" property="shopTypeId" jdbcType="BIGINT"/>
+        <result column="tg_name" property="name" jdbcType="VARCHAR"/>
+        <result column="tg_sort" property="sort" jdbcType="INTEGER"/>
+        <result column="tg_pic" property="pic" jdbcType="VARCHAR"/>
+        <result column="tg_description" property="description" jdbcType="VARCHAR"/>
+        <result column="tg_characteristic" property="characteristic" jdbcType="VARCHAR"/>
+        <result column="tg_status" property="status" jdbcType="INTEGER"/>
+        <result column="tg_min_buy" property="minBuy" jdbcType="INTEGER"/>
+        <result column="tg_unit" property="unit" jdbcType="VARCHAR"/>
+        <result column="tg_sell_time" property="sellTime" jdbcType="VARCHAR"/>
+        <result column="tg_package_fee" property="packageFee" jdbcType="DECIMAL"/>
+        <result column="tg_now_stock" property="nowStock" jdbcType="INTEGER"/>
+        <result column="tg_max_stock" property="maxStock" jdbcType="INTEGER"/>
+        <result column="tg_price" property="price" jdbcType="DECIMAL"/>
+        <result column="tg_protein" property="protein" jdbcType="DECIMAL"/>
+        <result column="tg_carbohydrate" property="carbohydrate" jdbcType="DECIMAL"/>
+        <result column="tg_discount_rate" property="discountRate" jdbcType="DECIMAL"/>
+        <result column="tg_max_discount" property="maxDiscount" jdbcType="INTEGER"/>
+        <result column="tg_adipose" property="adipose" jdbcType="DECIMAL"/>
+        <result column="tg_kacl" property="kacl" jdbcType="DECIMAL"/>
+        <result column="tg_weight" property="weight" jdbcType="INTEGER" />
+        <result column="tg_month_sell" property="monthSell" jdbcType="INTEGER" />
+        <result column="tg_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="tg_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="tg_create_user" property="createUser" jdbcType="BIGINT"/>
+        <result column="tg_update_user" property="updateUser" jdbcType="BIGINT"/>
+        <result column="tg_version" property="version" jdbcType="INTEGER"/>
+        <result column="tg_delete_flag" property="deleteFlag" jdbcType="BIT"/>
+        <collection property="nutritions" column="tgn_id"
+                    ofType="com.coretheorylife.modules.shop.entity.ext.ExtTGoodsNutrition">
+            <id column="tgn_id" property="id" jdbcType="BIGINT"/>
+            <result column="tgn_shop_id" property="shopId" jdbcType="BIGINT"/>
+            <result column="tgn_name" property="name" jdbcType="VARCHAR"/>
+            <result column="tgn_protein" property="protein" jdbcType="DECIMAL"/>
+            <result column="tgn_carbohydrate" property="carbohydrate" jdbcType="DECIMAL"/>
+            <result column="tgn_adipose" property="adipose" jdbcType="DECIMAL"/>
+            <result column="tgn_kacl" property="kacl" jdbcType="DECIMAL"/>
+            <result column="tgn_status" property="status" jdbcType="INTEGER"/>
+            <result column="tgn_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="tgn_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+            <result column="tgn_create_user" property="createUser" jdbcType="BIGINT"/>
+            <result column="tgn_update_user" property="updateUser" jdbcType="BIGINT"/>
+            <result column="tgn_version" property="version" jdbcType="INTEGER"/>
+            <result column="tgn_delete_flag" property="deleteFlag" jdbcType="BIT"/>
+
+            <result column="weight" property="weight" jdbcType="INTEGER"/>
+        </collection>
+
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, shop_id, shop_type_id, name, sort, pic, description, characteristic, status, 
+        min_buy, unit, sell_time, package_fee, now_stock, max_stock, discount_rate, max_discount,
+        price, protein, carbohydrate, adipose, kacl, weight, month_sell, create_time, update_time,
+        create_user, update_user, version, delete_flag
+    </sql>
+
+    <update id="subStock" parameterType="com.coretheorylife.modules.shop.entity.ext.ExtTGoods">
+        UPDATE  t_goods SET now_stock = now_stock - #{number}, month_sell = month_sell + #{number} WHERE id = #{id} AND now_stock &gt;= #{number}
+    </update>
+
+    <update id="returnStock" parameterType="com.coretheorylife.modules.shop.entity.ext.ExtTGoods">
+        UPDATE  t_goods SET now_stock = now_stock + #{number}, month_sell = month_sell + #{number} WHERE id = #{id}
+    </update>
+
+    <select id="selectGoodByShopIdOrGoodsName" resultMap="goodsSelect">
+        SELECT tg.id AS tg_id, tg.shop_id AS tg_shop_id, tg.shop_type_id AS tg_shop_type_id, tg.name AS tg_name,
+        tg.sort AS tg_sort, tg.pic AS tg_pic, tg.description AS tg_description, tg.characteristic AS tg_characteristic,
+        tg.status AS tg_status, tg.min_buy AS tg_min_buy, tg.unit AS tg_unit, tg.sell_time AS tg_sell_time,
+        tg.package_fee AS tg_package_fee, tg.now_stock AS tg_now_stock, tg.max_stock AS tg_max_stock, tg.price AS
+        tg_price, tg.discount_rate AS tg_discount_rate, tg.max_discount AS tg_max_discount,
+        tg.protein AS tg_protein, tg.carbohydrate AS tg_carbohydrate, tg.adipose AS tg_adipose, tg.kacl AS tg_kacl,
+        tg.weight AS tg_weight, tg.month_sell AS tg_month_sell,
+        tg.create_time AS tg_create_time, tg.update_time AS tg_update_time, tg.create_user AS tg_create_user,
+        tg.update_user AS tg_update_user, tg.version AS tg_version, tg.delete_flag AS tg_delete_flag,
+        tgn.id AS tgn_id, tgn.shop_id AS tgn_shop_id, tgn.name AS tgn_name, tgn.protein AS tgn_protein,
+        tgn.carbohydrate AS tgn_carbohydrate, tgn.adipose AS tgn_adipose, tgn.kacl AS tgn_kacl, tgn.status AS
+        tgn_status, tgi.weight AS weight,
+        tgn.create_time AS tgn_create_time, tgn.update_time AS tgn_update_time, tgn.create_user AS tgn_create_user,
+        tgn.update_user AS tgn_update_user, tgn.version AS tgn_version, tgn.delete_flag AS tgn_delete_flag
+        FROM t_goods AS tg
+        INNER JOIN t_goods_include AS tgi ON tgi.shop_goods_id = tg.id
+        <if test="deleteFlag != null">
+            AND tgi.delete_flag = #{deleteFlag}
+        </if>
+        INNER JOIN t_goods_nutrition AS tgn ON tgi.goods_nutrition_id = tgn.id
+        <if test="deleteFlag != null">
+            AND tgn.delete_flag = #{deleteFlag}
+        </if>
+        <where>
+            <if test="shopId != null and shopId != ''">
+                tg.shop_id = #{shopId}
+            </if>
+            <if test="deleteFlag != null">
+                AND tg.delete_flag = #{deleteFlag}
+            </if>
+            <if test="status != null and status != ''">
+                AND tg.status = #{status}
+            </if>
+            <if test="key != null and key != ''">
+                AND (tg.name LIKE CONCAT("%", #{key}, "%")
+                OR tgn.name LIKE CONCAT("%", #{key}, "%")
+                )
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.shop.entity.TGoods" keyProperty="id" useGeneratedKeys="true">
+        insert into t_goods
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="shopId != null" >
+                shop_id,
+            </if>
+            <if test="shopTypeId != null" >
+                shop_type_id,
+            </if>
+            <if test="name != null" >
+                name,
+            </if>
+            <if test="sort != null" >
+                sort,
+            </if>
+            <if test="pic != null" >
+                pic,
+            </if>
+            <if test="description != null" >
+                description,
+            </if>
+            <if test="characteristic != null" >
+                characteristic,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="minBuy != null" >
+                min_buy,
+            </if>
+            <if test="unit != null" >
+                unit,
+            </if>
+            <if test="sellTime != null" >
+                sell_time,
+            </if>
+            <if test="packageFee != null" >
+                package_fee,
+            </if>
+            <if test="nowStock != null" >
+                now_stock,
+            </if>
+            <if test="maxStock != null" >
+                max_stock,
+            </if>
+            <if test="discountRate != null" >
+                discount_rate,
+            </if>
+            <if test="maxDiscount != null" >
+                max_discount,
+            </if>
+            <if test="price != null" >
+                price,
+            </if>
+            <if test="protein != null" >
+                protein,
+            </if>
+            <if test="carbohydrate != null" >
+                carbohydrate,
+            </if>
+            <if test="adipose != null" >
+                adipose,
+            </if>
+            <if test="kacl != null" >
+                kacl,
+            </if>
+            <if test="weight != null" >
+                weight,
+            </if>
+            <if test="monthSell != null" >
+                month_sell,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createUser != null" >
+                create_user,
+            </if>
+            <if test="updateUser != null" >
+                update_user,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null" >
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="shopTypeId != null" >
+                #{shopTypeId,jdbcType=BIGINT},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="pic != null" >
+                #{pic,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null" >
+                #{description,jdbcType=VARCHAR},
+            </if>
+            <if test="characteristic != null" >
+                #{characteristic,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="minBuy != null" >
+                #{minBuy,jdbcType=INTEGER},
+            </if>
+            <if test="unit != null" >
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="sellTime != null" >
+                #{sellTime,jdbcType=VARCHAR},
+            </if>
+            <if test="packageFee != null" >
+                #{packageFee,jdbcType=DECIMAL},
+            </if>
+            <if test="nowStock != null" >
+                #{nowStock,jdbcType=INTEGER},
+            </if>
+            <if test="maxStock != null" >
+                #{maxStock,jdbcType=INTEGER},
+            </if>
+            <if test="discountRate != null" >
+                #{discountRate,jdbcType=DECIMAL},
+            </if>
+            <if test="maxDiscount != null" >
+                #{maxDiscount,jdbcType=INTEGER},
+            </if>
+            <if test="price != null" >
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="protein != null" >
+                #{protein,jdbcType=DECIMAL},
+            </if>
+            <if test="carbohydrate != null" >
+                #{carbohydrate,jdbcType=DECIMAL},
+            </if>
+            <if test="adipose != null" >
+                #{adipose,jdbcType=DECIMAL},
+            </if>
+            <if test="kacl != null" >
+                #{kacl,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                #{weight,jdbcType=INTEGER},
+            </if>
+            <if test="monthSell != null" >
+                #{monthSell,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+</mapper>

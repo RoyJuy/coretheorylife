@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.purchaser.dao.ext.ExtTPurchaserCoachGymLogMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.purchaser.entity.TPurchaserCoachGymLog" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT" />
+        <result column="coach_id" property="coachId" jdbcType="BIGINT" />
+        <result column="old_coach_id" property="oldCoachId" jdbcType="BIGINT" />
+        <result column="gym_id" property="gymId" jdbcType="BIGINT" />
+        <result column="old_gym_id" property="oldGymId" jdbcType="BIGINT" />
+        <result column="type" property="type" jdbcType="INTEGER" />
+        <result column="query_type" property="queryType" jdbcType="INTEGER" />
+        <result column="create_date" property="createDate" jdbcType="DATE" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <select id="queryPurchaseCountByGym" resultType="int">
+        SELECT COUNT(*)
+        FROM t_purchaser_coach_gym_log
+        <where>
+            <if test="gymId != null and gymId != ''">
+                gym_id = #{gymId}
+            </if>
+            <if test="oldGymId != null and oldGymId != ''">
+                AND old_gym_id = #{oldGymId}
+            </if>
+            <if test="timeFrom != null and timeFrom != ''">
+                AND create_date &gt;= #{timeFrom}
+            </if>
+            <if test="timeTo != null and timeTo != ''">
+                AND create_date &lt;= #{timeTo}
+            </if>
+            <if test="queryType != null and queryType != ''">
+                AND query_type = #{queryType}
+            </if>
+            <if test="createDate != null and createDate != ''">
+                AND create_date = #{createDate}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryPurchaseDateListByGym" resultType="java.util.HashMap">
+        SELECT create_date AS createDate, COUNT(*) AS count
+        FROM t_purchaser_coach_gym_log
+        <where>
+            <if test="gymId != null and gymId != ''">
+                gym_id = #{gymId}
+            </if>
+            <if test="oldGymId != null and oldGymId != ''">
+                AND old_gym_id = #{oldGymId}
+            </if>
+            <if test="timeFrom != null and timeFrom != ''">
+                AND create_date &gt;= #{timeFrom}
+            </if>
+            <if test="timeTo != null and timeTo != ''">
+                AND create_date &lt;= #{timeTo}
+            </if>
+            <if test="queryType != null and queryType != ''">
+                AND query_type = #{queryType}
+            </if>
+            <if test="createDate != null and createDate != ''">
+                AND create_date = #{createDate}
+            </if>
+        </where>
+        GROUP BY create_date
+    </select>
+</mapper>

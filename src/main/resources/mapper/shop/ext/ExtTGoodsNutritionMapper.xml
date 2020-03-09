@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.ext.ExtTGoodsNutritionMapper">
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.ext.ExtTGoodsNutrition" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="shop_id" property="shopId" jdbcType="BIGINT" />
+        <result column="name" property="name" jdbcType="VARCHAR" />
+        <result column="protein" property="protein" jdbcType="DECIMAL" />
+        <result column="carbohydrate" property="carbohydrate" jdbcType="DECIMAL" />
+        <result column="adipose" property="adipose" jdbcType="DECIMAL" />
+        <result column="kacl" property="kacl" jdbcType="DECIMAL" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        id, shop_id, name, protein, carbohydrate, adipose, kacl, status, create_time, update_time,
+        create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_goods_nutrition
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                /*这里之所以包含0和自己，因为自己定义的未经审核只能自己看到，审核通过就是大家都可以看到*/
+                AND (shop_id = #{shopId} OR shop_id = 0)
+            </if>
+            <if test="key != null and key != ''">
+                AND name LIKE CONCAT("%", #{key}, "%")
+            </if>
+        </where>
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_goods_nutrition
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND (shop_id = #{shopId} OR shop_id = 0)
+            </if>
+            <if test="key != null and key != ''">
+                AND name LIKE CONCAT("%", #{key}, "%")
+            </if>
+        </where>
+    </select>
+</mapper>

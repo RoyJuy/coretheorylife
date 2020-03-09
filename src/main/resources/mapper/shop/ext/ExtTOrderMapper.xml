@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.ext.ExtTOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.ext.ExtTOrder">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT"/>
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="INTEGER"/>
+        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="pay_price" property="payPrice" jdbcType="DECIMAL"/>
+        <result column="package_fee" property="packageFee" jdbcType="DECIMAL"/>
+        <result column="ship_fee" property="shipFee" jdbcType="DECIMAL"/>
+        <result column="ship_platform" property="shipPlatform" jdbcType="INTEGER"/>
+        <result column="ship_type" property="shipType" jdbcType="INTEGER"/>
+        <result column="ship_person" property="shipPerson" jdbcType="VARCHAR"/>
+        <result column="ship_number" property="shipNumber" jdbcType="VARCHAR"/>
+        <result column="ship_prefix" property="shipPrefix" jdbcType="VARCHAR"/>
+        <result column="ship_suffix" property="shipSuffix" jdbcType="VARCHAR"/>
+        <result column="ship_longitude" property="shipLongitude" jdbcType="DECIMAL"/>
+        <result column="ship_latitude" property="shipLatitude" jdbcType="DECIMAL"/>
+        <result column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR"/>
+        <result column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
+        <result column="eat_number" property="eatNumber" jdbcType="INTEGER"/>
+        <result column="ship_time" property="shipTime" jdbcType="TIMESTAMP"/>
+        <result column="ship_status" property="shipStatus" jdbcType="INTEGER"/>
+        <result column="urge_flag" property="urgeFlag" jdbcType="BIT"/>
+        <result column="urge_time" property="urgeTime" jdbcType="TIMESTAMP"/>
+        <result column="expected_ship_time" property="expectedShipTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="discount_fee" property="discountFee" jdbcType="DECIMAL"/>
+        <result column="discount_description" property="discountDescription" jdbcType="VARCHAR"/>
+        <result column="purchaser_coupon_id" property="purchaserCouponId" jdbcType="BIGINT"/>
+        <result column="purchaser_envelope_id" property="purchaserEnvelopeId" jdbcType="BIGINT"/>
+        <result column="has_rate" property="hasRate" jdbcType="BIT"/>
+        <result column="order_count" property="orderCount" jdbcType="INTEGER"/>
+        <result column="pay_timeout" property="payTimeout" jdbcType="INTEGER"/>
+        <result column="receiver_timeout" property="receiverTimeout" jdbcType="INTEGER"/>
+        <result column="ship_self" property="shipSelf" jdbcType="BIT"/>
+        <result column="send_ship_fee" property="sendShipFee" jdbcType="DECIMAL"/>
+        <result column="shop_ship_fee" property="shopShipFee" jdbcType="DECIMAL"/>
+        <result column="weight" property="weight" jdbcType="INTEGER"/>
+        <result column="sf_order_id" property="sfOrderId" jdbcType="VARCHAR"/>
+        <result column="ship_distance" property="shipDistance" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
+        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT"/>
+    </resultMap>
+
+    <resultMap id="listMap" type="com.coretheorylife.modules.shop.entity.ext.ExtTOrder">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT"/>
+        <result column="order_no" property="orderNo" jdbcType="VARCHAR"/>
+        <result column="pay_type" property="payType" jdbcType="INTEGER"/>
+        <result column="order_time" property="orderTime" jdbcType="TIMESTAMP"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="pay_price" property="payPrice" jdbcType="DECIMAL"/>
+        <result column="package_fee" property="packageFee" jdbcType="DECIMAL"/>
+        <result column="ship_fee" property="shipFee" jdbcType="DECIMAL"/>
+        <result column="ship_platform" property="shipPlatform" jdbcType="INTEGER"/>
+        <result column="ship_type" property="shipType" jdbcType="INTEGER"/>
+        <result column="ship_person" property="shipPerson" jdbcType="VARCHAR"/>
+        <result column="ship_number" property="shipNumber" jdbcType="VARCHAR"/>
+        <result column="ship_prefix" property="shipPrefix" jdbcType="VARCHAR"/>
+        <result column="ship_suffix" property="shipSuffix" jdbcType="VARCHAR"/>
+        <result column="ship_longitude" property="shipLongitude" jdbcType="DECIMAL"/>
+        <result column="ship_latitude" property="shipLatitude" jdbcType="DECIMAL"/>
+        <result column="receiver_mobile" property="receiverMobile" jdbcType="VARCHAR"/>
+        <result column="receiver_name" property="receiverName" jdbcType="VARCHAR"/>
+        <result column="eat_number" property="eatNumber" jdbcType="INTEGER"/>
+        <result column="ship_time" property="shipTime" jdbcType="TIMESTAMP"/>
+        <result column="ship_status" property="shipStatus" jdbcType="INTEGER"/>
+        <result column="urge_flag" property="urgeFlag" jdbcType="BIT"/>
+        <result column="urge_time" property="urgeTime" jdbcType="TIMESTAMP"/>
+        <result column="expected_ship_time" property="expectedShipTime" jdbcType="TIMESTAMP"/>
+        <result column="status" property="status" jdbcType="INTEGER"/>
+        <result column="discount_fee" property="discountFee" jdbcType="DECIMAL"/>
+        <result column="discount_description" property="discountDescription" jdbcType="VARCHAR"/>
+        <result column="purchaser_coupon_id" property="purchaserCouponId" jdbcType="BIGINT"/>
+        <result column="purchaser_envelope_id" property="purchaserEnvelopeId" jdbcType="BIGINT"/>
+        <result column="has_rate" property="hasRate" jdbcType="BIT"/>
+        <result column="order_count" property="orderCount" jdbcType="INTEGER"/>
+        <result column="pay_timeout" property="payTimeout" jdbcType="INTEGER"/>
+        <result column="receiver_timeout" property="receiverTimeout" jdbcType="INTEGER"/>
+        <result column="ship_self" property="shipSelf" jdbcType="BIT"/>
+        <result column="send_ship_fee" property="sendShipFee" jdbcType="DECIMAL"/>
+        <result column="shop_ship_fee" property="shopShipFee" jdbcType="DECIMAL"/>
+        <result column="weight" property="weight" jdbcType="INTEGER"/>
+        <result column="sf_order_id" property="sfOrderId" jdbcType="VARCHAR"/>
+        <result column="ship_distance" property="shipDistance" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
+        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT"/>
+
+        <result column="shopName" property="shopName" jdbcType="VARCHAR"/>
+        <result column="distance" property="distance" jdbcType="DECIMAL"/>
+        <result column="orderRate" property="orderRate" jdbcType="DECIMAL"/>
+
+        <association property="tPurchaserCoupon" column="tsc_id"
+                     javaType="com.coretheorylife.modules.purchaser.entity.TPurchaserCoupon">
+            <id column="tsc_id" property="id" jdbcType="BIGINT"/>
+            <result column="tsc_purchaser_id" property="purchaserId" jdbcType="BIGINT"/>
+            <result column="tsc_shop_id" property="shopId" jdbcType="BIGINT"/>
+            <result column="tsc_amount" property="amount" jdbcType="DECIMAL"/>
+            <result column="tsc_min_amount" property="minAmount" jdbcType="DECIMAL"/>
+            <result column="tsc_shared" property="shared" jdbcType="BIT"/>
+        </association>
+        <association property="tPurchaserEnvelope" column="tue_id"
+                     javaType="com.coretheorylife.modules.purchaser.entity.TPurchaserEnvelope">
+            <id column="tue_id" property="id" jdbcType="BIGINT"/>
+            <result column="tue_purchaser_id" property="purchaserId" jdbcType="BIGINT"/>
+            <result column="tue_amount" property="amount" jdbcType="DECIMAL"/>
+            <result column="tue_min_amount" property="minAmount" jdbcType="DECIMAL"/>
+        </association>
+        <association property="tPurchaser" column="tpr_id"
+                     javaType="com.coretheorylife.modules.purchaser.entity.ext.ExtTPurchaser">
+            <id column="tpr_id" property="id" jdbcType="BIGINT"/>
+            <result column="tpr_nick_name" property="nickName" jdbcType="VARCHAR"/>
+            <result column="tpr_sex" property="sex" jdbcType="INTEGER"/>
+            <result column="tpr_status" property="status" jdbcType="INTEGER"/>
+            <result column="tpr_avatar" property="avatar" jdbcType="VARCHAR"/>
+            <result column="tpr_birthday" property="birthday" jdbcType="TIMESTAMP"/>
+        </association>
+        <collection property="orderLines" column="tol_Id"
+                    ofType="com.coretheorylife.modules.shop.entity.ext.ExtTOrderLine">
+            <id column="tol_id" property="id" jdbcType="BIGINT"/>
+            <result column="tol_order_id" property="orderId" jdbcType="BIGINT"/>
+            <result column="tol_goods_id" property="goodsId" jdbcType="BIGINT"/>
+            <result column="tol_number" property="number" jdbcType="INTEGER"/>
+            <result column="tol_discount_rate" property="discountRate" jdbcType="DECIMAL"/>
+            <result column="tol_discount_number" property="discountNumber" jdbcType="INTEGER"/>
+            <result column="tol_specification" property="specification" jdbcType="VARCHAR"/>
+            <association property="goods" column="tg_id"
+                         javaType="com.coretheorylife.modules.shop.entity.ext.ExtTGoods">
+                <id column="tg_id" property="id" jdbcType="BIGINT"/>
+                <result column="tg_shop_id" property="shopId" jdbcType="BIGINT"/>
+                <result column="tg_shop_type_id" property="shopTypeId" jdbcType="BIGINT"/>
+                <result column="tg_name" property="name" jdbcType="VARCHAR"/>
+                <result column="tg_sort" property="sort" jdbcType="INTEGER"/>
+                <result column="tg_pic" property="pic" jdbcType="VARCHAR"/>
+                <result column="tg_description" property="description" jdbcType="VARCHAR"/>
+                <result column="tg_characteristic" property="characteristic" jdbcType="VARCHAR"/>
+                <result column="tg_status" property="status" jdbcType="INTEGER"/>
+                <result column="tg_min_buy" property="minBuy" jdbcType="INTEGER"/>
+                <result column="tg_unit" property="unit" jdbcType="VARCHAR"/>
+                <result column="tg_sell_time" property="sellTime" jdbcType="VARCHAR"/>
+                <result column="tg_package_fee" property="packageFee" jdbcType="DECIMAL"/>
+                <result column="tg_now_stock" property="nowStock" jdbcType="INTEGER"/>
+                <result column="tg_max_stock" property="maxStock" jdbcType="INTEGER"/>
+                <result column="tg_price" property="price" jdbcType="DECIMAL"/>
+                <result column="tg_protein" property="protein" jdbcType="DECIMAL"/>
+                <result column="tg_carbohydrate" property="carbohydrate" jdbcType="DECIMAL"/>
+                <result column="tg_discount_rate" property="discountRate" jdbcType="DECIMAL"/>
+                <result column="tg_max_discount" property="maxDiscount" jdbcType="INTEGER"/>
+                <result column="tg_adipose" property="adipose" jdbcType="DECIMAL"/>
+                <result column="tg_kacl" property="kacl" jdbcType="DECIMAL"/>
+                <result column="tg_weight" property="weight" jdbcType="INTEGER"/>
+                <result column="tg_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+                <result column="tg_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+                <result column="tg_create_user" property="createUser" jdbcType="BIGINT"/>
+                <result column="tg_update_user" property="updateUser" jdbcType="BIGINT"/>
+                <result column="tg_version" property="version" jdbcType="INTEGER"/>
+                <result column="tg_delete_flag" property="deleteFlag" jdbcType="BIT"/>
+                <collection property="nutritions" column="tgn_id"
+                            ofType="com.coretheorylife.modules.shop.entity.ext.ExtTGoodsNutrition">
+                    <id column="tgn_id" property="id" jdbcType="BIGINT"/>
+                    <result column="tgn_shop_id" property="shopId" jdbcType="BIGINT"/>
+                    <result column="tgn_name" property="name" jdbcType="VARCHAR"/>
+                    <result column="tgn_protein" property="protein" jdbcType="DECIMAL"/>
+                    <result column="tgn_carbohydrate" property="carbohydrate" jdbcType="DECIMAL"/>
+                    <result column="tgn_adipose" property="adipose" jdbcType="DECIMAL"/>
+                    <result column="tgn_kacl" property="kacl" jdbcType="DECIMAL"/>
+                    <result column="tgn_status" property="status" jdbcType="INTEGER"/>
+                    <result column="tgn_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+                    <result column="tgn_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+                    <result column="tgn_create_user" property="createUser" jdbcType="BIGINT"/>
+                    <result column="tgn_update_user" property="updateUser" jdbcType="BIGINT"/>
+                    <result column="tgn_version" property="version" jdbcType="INTEGER"/>
+                    <result column="tgn_delete_flag" property="deleteFlag" jdbcType="BIT"/>
+
+                    <result column="weight" property="weight" jdbcType="INTEGER"/>
+                </collection>
+            </association>
+        </collection>
+        <collection property="logs" column="tolog_Id"
+                    ofType="com.coretheorylife.modules.shop.entity.TOrderLog">
+            <id column="tolog_id" property="id" jdbcType="BIGINT"/>
+            <result column="tolog_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="tolog_code" property="code" jdbcType="INTEGER"/>
+            <result column="tolog_description" property="description" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, shop_id, purchaser_id, order_no, pay_type, order_time, remark, price, pay_price,
+        package_fee, ship_fee, ship_platform, ship_type, ship_person, ship_number, ship_prefix,
+        ship_suffix, ship_longitude, ship_latitude, receiver_mobile, receiver_name, eat_number,
+        ship_time, ship_status, urge_flag, urge_time, expected_ship_time, status, discount_fee,
+        discount_description, purchaser_coupon_id, purchaser_envelope_id, has_rate, order_count,
+        pay_timeout, receiver_timeout, ship_self, send_ship_fee, shop_ship_fee, weight, sf_order_id,
+        ship_distance, create_time, update_time, create_user, update_user, version, delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_order
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND shop_id = #{shopId}
+            </if>
+            <if test="orderNo != null and orderNo != ''">
+                AND order_no LIKE concat("%", #{orderNo}, "%")
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND purchaser_id = #{purchaserId}
+            </if>
+        </where>
+        ORDER BY create_time DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_order
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND shop_id = #{shopId}
+            </if>
+            <if test="orderNo != null and orderNo != ''">
+                AND order_no LIKE concat("%", #{orderNo}, "%")
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND purchaser_id = #{purchaserId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryListByShopIdOrUserId" resultMap="listMap">
+        SELECT tor.id, tor.shop_id, tor.purchaser_id, tor.order_no, tor.pay_type, tor.order_time, tor.remark,
+        tor.price, tor.pay_price, tor.package_fee, tor.ship_fee, tor.ship_platform, tor.ship_type,
+        tor.ship_person, tor.ship_number, tor.eat_number, tor.ship_time, tor.ship_status,
+        tor.urge_flag, tor.urge_time, tor.expected_ship_time, tor.status, tor.create_time, tor.update_time,
+        tor.create_user, tor.update_user, tor.version, tor.delete_flag, tor.discount_fee, tor.discount_description,
+        tor.purchaser_coupon_id, tor.purchaser_envelope_id, tor.ship_prefix, tor.ship_suffix, tor.ship_longitude,
+        tor.ship_latitude, tor.receiver_mobile, tor.receiver_name, tor.has_rate,
+        tol.id AS tol_id, tol.order_id AS tol_order_id, tol.goods_id AS tol_goods_id, tol.number AS tol_number,
+        tol.discount_rate AS tol_discount_rate, tol.discount_number AS tol_discount_number, tol.specification AS
+        tol_specification, tor.order_count, tor.pay_timeout, tor.receiver_timeout, tprr.rate AS orderRate,
+        tor.ship_self, tor.send_ship_fee, tor.shop_ship_fee, tor.weight, tor.sf_order_id, tor.ship_distance,
+        tg.id AS tg_id, tg.shop_id AS tg_shop_id, tg.shop_type_id AS tg_shop_type_id, tg.name AS tg_name,
+        tg.sort AS tg_sort, tg.pic AS tg_pic, tg.description AS tg_description, tg.characteristic AS tg_characteristic,
+        tg.status AS tg_status, tg.min_buy AS tg_min_buy, tg.unit AS tg_unit, tg.sell_time AS tg_sell_time,
+        tg.package_fee AS tg_package_fee, tg.now_stock AS tg_now_stock, tg.max_stock AS tg_max_stock, tg.price AS
+        tg_price, tg.discount_rate AS tg_discount_rate, tg.max_discount AS tg_max_discount,
+        tg.protein AS tg_protein, tg.carbohydrate AS tg_carbohydrate, tg.adipose AS tg_adipose, tg.kacl AS tg_kacl,
+        tg.create_time AS tg_create_time, tg.update_time AS tg_update_time, tg.create_user AS tg_create_user,
+        tg.update_user AS tg_update_user, tg.version AS tg_version, tg.delete_flag AS tg_delete_flag,
+        tgn.id AS tgn_id, tgn.shop_id AS tgn_shop_id, tgn.name AS tgn_name, tgn.protein AS tgn_protein,
+        tgn.carbohydrate AS tgn_carbohydrate, tgn.adipose AS tgn_adipose, tgn.kacl AS tgn_kacl, tgn.status AS
+        tgn_status, tg.weight as tg_weight,
+        tgn.create_time AS tgn_create_time, tgn.update_time AS tgn_update_time, tgn.create_user AS tgn_create_user,
+        tgn.update_user AS tgn_update_user, tgn.version AS tgn_version, tgn.delete_flag AS tgn_delete_flag, tgi.weight,
+        tue.id AS tue_id, tue.purchaser_id AS tue_purchaser_id, tue.amount AS tue_amount, tue.min_amount AS
+        tue_min_amount,
+        tsc.id AS tsc_id, tsc.purchaser_id AS tsc_purchaser_id, tsc.shop_id AS tsc_shop_id, tsc.amount AS tsc_amount,
+        tsc.min_amount AS tsc_min_amount, tsc.shared AS tsc_shared,
+        tpr.id AS tpr_id, tpr.nick_name AS tpr_nick_name, tpr.sex AS tpr_sex, tpr.status AS tpr_status, tpr.avatar AS
+        tpr_avatar,
+        tpr.birthday AS tpr_birthday, ts.name AS shopName,
+        (6371 * ACOS (COS(RADIANS(tor.ship_latitude))* COS(RADIANS(ts.latitude))
+        * COS(RADIANS(ts.longitude) - RADIANS(tor.ship_longitude)) + SIN(RADIANS(tor.ship_latitude))
+        * SIN(RADIANS(ts.latitude)))) AS distance,
+        tolog.id AS tolog_id, tolog.create_time AS tolog_create_time, tolog.description AS tolog_description
+        FROM t_order AS tor
+        INNER JOIN t_order_line AS tol ON tol.order_id = tor.id
+        INNER JOIN t_goods AS tg ON tg.id = tol.goods_id
+        INNER JOIN t_goods_include AS tgi ON tgi.shop_goods_id = tg.id
+        INNER JOIN t_goods_nutrition AS tgn ON tgi.goods_nutrition_id = tgn.id
+        LEFT JOIN t_purchaser_envelope AS tue ON tue.id = tor.purchaser_envelope_id
+        LEFT JOIN t_purchaser_coupon AS tsc ON tsc.id = tor.purchaser_coupon_id
+        INNER JOIN t_purchaser AS tpr ON tpr.id = tor.purchaser_id
+        INNER JOIN t_shop AS ts ON ts.id = tor.shop_id
+        LEFT JOIN t_order_log AS tolog ON tolog.order_id = tor.id
+        LEFT JOIN t_purchaser_rate AS tprr on tprr.order_id = tor.id AND tprr.delete_flag = FALSE
+        <where>
+            <if test="shopId != null and shopId != ''">
+                tor.shop_id = #{shopId}
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND tor.purchaser_id = #{purchaserId}
+            </if>
+            <if test="deleteFlag != null and deleteFlag != ''">
+                AND tor.delete_flag = #{deleteFlag}
+                -- AND tol.delete_flag = #{deleteFlag}
+                -- AND tgt.delete_flag = #{deleteFlag}
+                -- AND tg.delete_flag = #{deleteFlag}
+                -- AND tgi.delete_flag = #{deleteFlag}
+                -- AND tgn.delete_flag = #{deleteFlag}
+            </if>
+            <if test="status != null and status != ''">
+                AND tor.status = #{status}
+            </if>
+            <if test="statuses != null and statuses != ''">
+                AND tor.status IN (${statuses})
+            </if>
+            <if test="orderId != null and orderId != ''">
+                AND tor.id = #{orderId}
+            </if>
+            <if test="createTimeBetween != null">
+                AND tor.create_time &gt;= #{createTimeBetween}
+            </if>
+            <if test="createTimeTo != null">
+                AND tor.create_time &lt;= #{createTimeTo}
+            </if>
+            <if test="hasRate != null and hasRate != ''">
+                AND tor.has_rate = #{hasRate}
+            </if>
+            <if test="urgeFlag != null and urgeFlag != ''">
+                AND tor.urge_flag = #{urgeFlag}
+            </if>
+        </where>
+        <if test="offset != null and limit != null">
+            AND tor.id IN (select id from (SELECT id FROM t_order
+            <where>
+                <if test="shopId != null and shopId != ''">
+                    shop_id = #{shopId}
+                </if>
+                <if test="purchaserId != null and purchaserId != ''">
+                    AND purchaser_id = #{purchaserId}
+                </if>
+                <if test="deleteFlag != null and deleteFlag != ''">
+                    AND delete_flag = #{deleteFlag}
+                </if>
+                <if test="status != null and status != ''">
+                    AND status = #{status}
+                </if>
+                <if test="statuses != null and statuses != ''">
+                    AND status IN (${statuses})
+                </if>
+                <if test="orderId != null and orderId != ''">
+                    AND id = #{orderId}
+                </if>
+                <if test="createTimeBetween != null">
+                    AND create_time &gt;= #{createTimeBetween}
+                </if>
+                <if test="createTimeTo != null">
+                    AND create_time &lt;= #{createTimeTo}
+                </if>
+                <if test="hasRate != null and hasRate != ''">
+                    AND has_rate = #{hasRate}
+                </if>
+                <if test="urgeFlag != null and urgeFlag != ''">
+                    AND urge_flag = #{urgeFlag}
+                </if>
+            </where>
+            LIMIT #{offset}, #{limit}) as temp)
+        </if>
+        ORDER BY tor.update_time DESC
+    </select>
+
+    <select id="queryTotalByShopIdOrUserId" resultType="int">
+        SELECT COUNT(*)
+        FROM t_order
+        <where>
+            <if test="shopId != null and shopId != ''">
+                shop_id = #{shopId}
+            </if>
+            <if test="purchaserId != null and purchaserId != ''">
+                AND purchaser_id = #{purchaserId}
+            </if>
+            <if test="deleteFlag != null and deleteFlag != ''">
+                AND delete_flag = #{deleteFlag}
+            </if>
+            <if test="status != null and status != ''">
+                AND status = #{status}
+            </if>
+            <if test="statuses != null and statuses != ''">
+                AND status IN (${statuses})
+            </if>
+            <if test="orderId != null and orderId != ''">
+                AND id = #{orderId}
+            </if>
+            <if test="createTimeBetween != null">
+                AND create_time &gt;= #{createTimeThan}
+            </if>
+            <if test="createTimeTo != null">
+                AND create_time &lt;= #{createTimeThan}
+            </if>
+            <if test="hasRate != null and hasRate != ''">
+                AND has_rate = #{hasRate}
+            </if>
+            <if test="urgeFlag != null and urgeFlag != ''">
+                AND urge_flag = #{urgeFlag}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.shop.entity.TOrder" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="purchaserId != null">
+                purchaser_id,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="payType != null">
+                pay_type,
+            </if>
+            <if test="orderTime != null">
+                order_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="payPrice != null">
+                pay_price,
+            </if>
+            <if test="packageFee != null">
+                package_fee,
+            </if>
+            <if test="shipFee != null">
+                ship_fee,
+            </if>
+            <if test="shipPlatform != null">
+                ship_platform,
+            </if>
+            <if test="shipType != null">
+                ship_type,
+            </if>
+            <if test="shipPerson != null">
+                ship_person,
+            </if>
+            <if test="shipNumber != null">
+                ship_number,
+            </if>
+            <if test="shipPrefix != null">
+                ship_prefix,
+            </if>
+            <if test="shipSuffix != null">
+                ship_suffix,
+            </if>
+            <if test="shipLongitude != null">
+                ship_longitude,
+            </if>
+            <if test="shipLatitude != null">
+                ship_latitude,
+            </if>
+            <if test="receiverMobile != null">
+                receiver_mobile,
+            </if>
+            <if test="receiverName != null">
+                receiver_name,
+            </if>
+            <if test="eatNumber != null">
+                eat_number,
+            </if>
+            <if test="shipTime != null">
+                ship_time,
+            </if>
+            <if test="shipStatus != null">
+                ship_status,
+            </if>
+            <if test="urgeFlag != null">
+                urge_flag,
+            </if>
+            <if test="urgeTime != null">
+                urge_time,
+            </if>
+            <if test="expectedShipTime != null">
+                expected_ship_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="discountFee != null">
+                discount_fee,
+            </if>
+            <if test="discountDescription != null">
+                discount_description,
+            </if>
+            <if test="purchaserCouponId != null">
+                purchaser_coupon_id,
+            </if>
+            <if test="purchaserEnvelopeId != null">
+                purchaser_envelope_id,
+            </if>
+            <if test="hasRate != null">
+                has_rate,
+            </if>
+            <if test="orderCount != null">
+                order_count,
+            </if>
+            <if test="payTimeout != null">
+                pay_timeout,
+            </if>
+            <if test="receiverTimeout != null">
+                receiver_timeout,
+            </if>
+            <if test="shipSelf != null">
+                ship_self,
+            </if>
+            <if test="sendShipFee != null">
+                send_ship_fee,
+            </if>
+            <if test="shopShipFee != null">
+                shop_ship_fee,
+            </if>
+            <if test="weight != null">
+                weight,
+            </if>
+            <if test="sfOrderId != null">
+                sf_order_id,
+            </if>
+            <if test="shipDistance != null">
+                ship_distance,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+            <if test="createUser != null">
+                create_user,
+            </if>
+            <if test="updateUser != null">
+                update_user,
+            </if>
+            <if test="version != null">
+                version,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=BIGINT},
+            </if>
+            <if test="purchaserId != null">
+                #{purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payType != null">
+                #{payType,jdbcType=INTEGER},
+            </if>
+            <if test="orderTime != null">
+                #{orderTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="payPrice != null">
+                #{payPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="packageFee != null">
+                #{packageFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shipFee != null">
+                #{shipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shipPlatform != null">
+                #{shipPlatform,jdbcType=INTEGER},
+            </if>
+            <if test="shipType != null">
+                #{shipType,jdbcType=INTEGER},
+            </if>
+            <if test="shipPerson != null">
+                #{shipPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="shipNumber != null">
+                #{shipNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="shipPrefix != null">
+                #{shipPrefix,jdbcType=VARCHAR},
+            </if>
+            <if test="shipSuffix != null">
+                #{shipSuffix,jdbcType=VARCHAR},
+            </if>
+            <if test="shipLongitude != null">
+                #{shipLongitude,jdbcType=DECIMAL},
+            </if>
+            <if test="shipLatitude != null">
+                #{shipLatitude,jdbcType=DECIMAL},
+            </if>
+            <if test="receiverMobile != null">
+                #{receiverMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="receiverName != null">
+                #{receiverName,jdbcType=VARCHAR},
+            </if>
+            <if test="eatNumber != null">
+                #{eatNumber,jdbcType=INTEGER},
+            </if>
+            <if test="shipTime != null">
+                #{shipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shipStatus != null">
+                #{shipStatus,jdbcType=INTEGER},
+            </if>
+            <if test="urgeFlag != null">
+                #{urgeFlag,jdbcType=BIT},
+            </if>
+            <if test="urgeTime != null">
+                #{urgeTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="expectedShipTime != null">
+                #{expectedShipTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="discountFee != null">
+                #{discountFee,jdbcType=DECIMAL},
+            </if>
+            <if test="discountDescription != null">
+                #{discountDescription,jdbcType=VARCHAR},
+            </if>
+            <if test="purchaserCouponId != null">
+                #{purchaserCouponId,jdbcType=BIGINT},
+            </if>
+            <if test="purchaserEnvelopeId != null">
+                #{purchaserEnvelopeId,jdbcType=BIGINT},
+            </if>
+            <if test="hasRate != null">
+                #{hasRate,jdbcType=BIT},
+            </if>
+            <if test="orderCount != null">
+                #{orderCount,jdbcType=INTEGER},
+            </if>
+            <if test="payTimeout != null">
+                #{payTimeout,jdbcType=INTEGER},
+            </if>
+            <if test="receiverTimeout != null">
+                #{receiverTimeout,jdbcType=INTEGER},
+            </if>
+            <if test="shipSelf != null">
+                #{shipSelf,jdbcType=BIT},
+            </if>
+            <if test="sendShipFee != null">
+                #{sendShipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="shopShipFee != null">
+                #{shopShipFee,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null">
+                #{weight,jdbcType=INTEGER},
+            </if>
+            <if test="sfOrderId != null">
+                #{sfOrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="shipDistance != null">
+                #{shipDistance,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null">
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null">
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null">
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+</mapper>

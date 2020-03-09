@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.shop.dao.ext.ExtTGoodsTypeMapper">
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.shop.entity.ext.ExtTGoodsType">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
+        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT"/>
+    </resultMap>
+
+    <resultMap id="listMap" type="com.coretheorylife.modules.shop.entity.ext.ExtTGoodsType">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="shop_id" property="shopId" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="sort" property="sort" jdbcType="INTEGER"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="create_user" property="createUser" jdbcType="BIGINT"/>
+        <result column="update_user" property="updateUser" jdbcType="BIGINT"/>
+        <result column="version" property="version" jdbcType="INTEGER"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT"/>
+        <collection property="goods" column="tg_id" ofType="com.coretheorylife.modules.shop.entity.ext.ExtTGoods">
+            <id column="tg_id" property="id" jdbcType="BIGINT"/>
+            <result column="tg_shop_id" property="shopId" jdbcType="BIGINT"/>
+            <result column="tg_shop_type_id" property="shopTypeId" jdbcType="BIGINT"/>
+            <result column="tg_name" property="name" jdbcType="VARCHAR"/>
+            <result column="tg_sort" property="sort" jdbcType="INTEGER"/>
+            <result column="tg_pic" property="pic" jdbcType="VARCHAR"/>
+            <result column="tg_description" property="description" jdbcType="VARCHAR"/>
+            <result column="tg_characteristic" property="characteristic" jdbcType="VARCHAR"/>
+            <result column="tg_status" property="status" jdbcType="INTEGER"/>
+            <result column="tg_min_buy" property="minBuy" jdbcType="INTEGER"/>
+            <result column="tg_unit" property="unit" jdbcType="VARCHAR"/>
+            <result column="tg_sell_time" property="sellTime" jdbcType="VARCHAR"/>
+            <result column="tg_package_fee" property="packageFee" jdbcType="DECIMAL"/>
+            <result column="tg_now_stock" property="nowStock" jdbcType="INTEGER"/>
+            <result column="tg_max_stock" property="maxStock" jdbcType="INTEGER"/>
+            <result column="tg_price" property="price" jdbcType="DECIMAL"/>
+            <result column="tg_protein" property="protein" jdbcType="DECIMAL"/>
+            <result column="tg_carbohydrate" property="carbohydrate" jdbcType="DECIMAL"/>
+            <result column="tg_discount_rate" property="discountRate" jdbcType="DECIMAL"/>
+            <result column="tg_max_discount" property="maxDiscount" jdbcType="INTEGER"/>
+            <result column="tg_adipose" property="adipose" jdbcType="DECIMAL"/>
+            <result column="tg_kacl" property="kacl" jdbcType="DECIMAL"/>
+            <result column="tg_weight" property="weight" jdbcType="INTEGER" />
+            <result column="tg_month_sell" property="monthSell" jdbcType="INTEGER" />
+            <result column="tg_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+            <result column="tg_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+            <result column="tg_create_user" property="createUser" jdbcType="BIGINT"/>
+            <result column="tg_update_user" property="updateUser" jdbcType="BIGINT"/>
+            <result column="tg_version" property="version" jdbcType="INTEGER"/>
+            <result column="tg_delete_flag" property="deleteFlag" jdbcType="BIT"/>
+            <collection property="nutritions" column="tgn_id"
+                        ofType="com.coretheorylife.modules.shop.entity.ext.ExtTGoodsNutrition">
+                <id column="tgn_id" property="id" jdbcType="BIGINT"/>
+                <result column="tgn_shop_id" property="shopId" jdbcType="BIGINT"/>
+                <result column="tgn_name" property="name" jdbcType="VARCHAR"/>
+                <result column="tgn_protein" property="protein" jdbcType="DECIMAL"/>
+                <result column="tgn_carbohydrate" property="carbohydrate" jdbcType="DECIMAL"/>
+                <result column="tgn_adipose" property="adipose" jdbcType="DECIMAL"/>
+                <result column="tgn_kacl" property="kacl" jdbcType="DECIMAL"/>
+                <result column="tgn_status" property="status" jdbcType="INTEGER"/>
+                <result column="tgn_create_time" property="createTime" jdbcType="TIMESTAMP"/>
+                <result column="tgn_update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+                <result column="tgn_create_user" property="createUser" jdbcType="BIGINT"/>
+                <result column="tgn_update_user" property="updateUser" jdbcType="BIGINT"/>
+                <result column="tgn_version" property="version" jdbcType="INTEGER"/>
+                <result column="tgn_delete_flag" property="deleteFlag" jdbcType="BIT"/>
+
+                <result column="weight" property="weight" jdbcType="INTEGER"/>
+            </collection>
+
+            <collection property="goodsLabels" column="tgl_id"
+                        ofType="com.coretheorylife.modules.shop.entity.ext.ExtTGoodsLabel">
+                <id column="tgl_id" property="id" jdbcType="BIGINT"/>
+                <result column="tgl_goods_id" property="goodsId" jdbcType="BIGINT"/>
+                <result column="tgl_name" property="name" jdbcType="VARCHAR"/>
+                <result column="tgl_sort" property="sort" jdbcType="INTEGER"/>
+
+                <collection property="goodsSelects" column="tgs_id"
+                            ofType="com.coretheorylife.modules.shop.entity.ext.ExtTGoodsSelect">
+                    <id column="tgs_id" property="id" jdbcType="BIGINT"/>
+                    <result column="tgs_goods_label_id" property="goodsLabelId" jdbcType="BIGINT"/>
+                    <result column="tgs_goods_nutrition_id" property="goodsNutritionId" jdbcType="BIGINT"/>
+                    <result column="tgs_name" property="name" jdbcType="VARCHAR"/>
+                    <result column="tgs_weight" property="weight" jdbcType="INTEGER"/>
+                    <result column="tgs_sort" property="sort" jdbcType="INTEGER"/>
+                    <result column="tgs_price" property="price" jdbcType="DECIMAL"/>
+
+                    <result column="tgs_protein" property="protein" jdbcType="DECIMAL"/>
+                    <result column="tgs_carbohydrate" property="carbohydrate" jdbcType="DECIMAL"/>
+                    <result column="tgs_adipose" property="adipose" jdbcType="DECIMAL"/>
+                    <result column="tgs_kacl" property="kacl" jdbcType="DECIMAL"/>
+
+                </collection>
+            </collection>
+        </collection>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, shop_id, name, sort, create_time, update_time, create_user, update_user, version, 
+        delete_flag
+    </sql>
+
+    <select id="queryList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM t_goods_type
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND shop_id = #{shopId}
+            </if>
+        </where>
+        ORDER BY sort DESC
+        <if test="offset != null and limit != null">
+            LIMIT #{offset}, #{limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        SELECT COUNT(*)
+        FROM t_goods_type
+        <where>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag}
+            </if>
+            <if test="shopId != null and shopId != ''">
+                AND shop_id = #{shopId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryAllGoodByShopId" resultMap="listMap">
+        SELECT tgt.id, tgt.shop_id, tgt.name, tgt.sort, tgt.create_time, tgt.update_time, tgt.create_user,
+        tgt.update_user, tgt.version, tgt.delete_flag,
+        tg.id AS tg_id, tg.shop_id AS tg_shop_id, tg.shop_type_id AS tg_shop_type_id, tg.name AS tg_name,
+        tg.sort AS tg_sort, tg.pic AS tg_pic, tg.description AS tg_description, tg.characteristic AS tg_characteristic,
+        tg.status AS tg_status, tg.min_buy AS tg_min_buy, tg.unit AS tg_unit, tg.sell_time AS tg_sell_time,
+        tg.package_fee AS tg_package_fee, tg.now_stock AS tg_now_stock, tg.max_stock AS tg_max_stock, tg.price AS
+        tg_price, tg.discount_rate AS tg_discount_rate, tg.max_discount AS tg_max_discount,
+        tg.protein AS tg_protein, tg.carbohydrate AS tg_carbohydrate, tg.adipose AS tg_adipose, tg.kacl AS tg_kacl,
+        tg.weight AS tg_weight, tg.month_sell AS tg_month_sell,
+        tg.create_time AS tg_create_time, tg.update_time AS tg_update_time, tg.create_user AS tg_create_user,
+        tg.update_user AS tg_update_user, tg.version AS tg_version, tg.delete_flag AS tg_delete_flag,
+        tgn.id AS tgn_id, tgn.shop_id AS tgn_shop_id, tgn.name AS tgn_name, tgn.protein AS tgn_protein,
+        tgn.carbohydrate AS tgn_carbohydrate, tgn.adipose AS tgn_adipose, tgn.kacl AS tgn_kacl, tgn.status AS
+        tgn_status,
+        tgn.create_time AS tgn_create_time, tgn.update_time AS tgn_update_time, tgn.create_user AS tgn_create_user,
+        tgn.update_user AS tgn_update_user, tgn.version AS tgn_version, tgn.delete_flag AS tgn_delete_flag, tgi.weight
+        AS weight,
+        tgl.id AS tgl_id, tgl.goods_id AS tgl_goods_id, tgl.name AS tgl_name, tgl.sort AS tgl_sort,
+        tgs.id AS tgs_id, tgs.goods_label_id AS tgs_goods_label_id, tgs.goods_nutrition_id AS tgs_goods_nutrition_id,
+        tgs.name AS tgs_name, tgs.weight AS tgs_weight, tgs.sort AS tgs_sort, tgs.price AS tgs_price,
+        tgs.protein AS tgs_protein, tgs.carbohydrate AS tgs_carbohydrate,
+        tgs.adipose AS tgs_adipose, tgs.kacl AS tgs_kacl
+        FROM t_goods_type AS tgt
+        <choose>
+            <when test="isShop != null">
+                LEFT
+            </when>
+            <otherwise>
+                INNER
+            </otherwise>
+        </choose>
+        JOIN t_goods AS tg ON tg.shop_type_id = tgt.id
+        <if test="deleteFlag != null">
+            AND tg.delete_flag = #{deleteFlag}
+        </if>
+        <choose>
+            <when test="isShop != null">
+                LEFT
+            </when>
+            <otherwise>
+                INNER
+            </otherwise>
+        </choose>
+        JOIN t_goods_include AS tgi ON tgi.shop_goods_id = tg.id
+        <if test="deleteFlag != null">
+            AND tgi.delete_flag = #{deleteFlag}
+        </if>
+        LEFT JOIN t_goods_nutrition AS tgn ON tgi.goods_nutrition_id = tgn.id
+        <if test="deleteFlag != null">
+            AND tgn.delete_flag = #{deleteFlag}
+        </if>
+        LEFT JOIN t_goods_label AS tgl on tgl.goods_id = tg.id
+        <if test="deleteFlag != null">
+            AND tgl.delete_flag = #{deleteFlag}
+        </if>
+        LEFT JOIN t_goods_select AS tgs on tgs.goods_label_id = tgl.id
+        <if test="deleteFlag != null">
+            AND tgs.delete_flag = #{deleteFlag}
+        </if>
+        <where>
+            <if test="shopId != null">
+                tgt.shop_id = #{shopId}
+            </if>
+            <if test="deleteFlag != null">
+                AND tgt.delete_flag = #{deleteFlag}
+            </if>
+            <if test="status != null and status != ''">
+                AND tg.status = #{status}
+            </if>
+            <if test="goodsId != null and goodsId != ''">
+                AND tg.id = #{goodsId}
+            </if>
+            <if test="goodsTypeId != null and goodsTypeId != ''">
+                AND tgt.id = #{goodsTypeId}
+            </if>
+            <if test="key != null and key != ''">
+                AND tg.name LIKE CONCAT("%", #{key}, "%")
+            </if>
+        </where>
+    </select>
+</mapper>

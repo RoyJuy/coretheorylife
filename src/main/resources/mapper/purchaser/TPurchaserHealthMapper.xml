@@ -1,0 +1,528 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coretheorylife.modules.purchaser.dao.TPurchaserHealthMapper" >
+
+    <resultMap id="BaseResultMap" type="com.coretheorylife.modules.purchaser.entity.TPurchaserHealth" >
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="purchaser_id" property="purchaserId" jdbcType="BIGINT" />
+        <result column="height" property="height" jdbcType="DECIMAL" />
+        <result column="weight" property="weight" jdbcType="DECIMAL" />
+        <result column="target" property="target" jdbcType="INTEGER" />
+        <result column="standard_weight" property="standardWeight" jdbcType="DECIMAL" />
+        <result column="exercise" property="exercise" jdbcType="INTEGER" />
+        <result column="basal_metabolism" property="basalMetabolism" jdbcType="DECIMAL" />
+        <result column="sport_metabolism" property="sportMetabolism" jdbcType="DECIMAL" />
+        <result column="body_fat_rate" property="bodyFatRate" jdbcType="DECIMAL" />
+        <result column="fat_need" property="fatNeed" jdbcType="DECIMAL" />
+        <result column="protein_need" property="proteinNeed" jdbcType="DECIMAL" />
+        <result column="carbohydrate_need" property="carbohydrateNeed" jdbcType="DECIMAL" />
+        <result column="examer" property="examer" jdbcType="BIT" />
+        <result column="dream_weight" property="dreamWeight" jdbcType="DECIMAL" />
+        <result column="kcl_need" property="kclNeed" jdbcType="DECIMAL" />
+        <result column="dream_date" property="dreamDate" jdbcType="TIMESTAMP" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="create_user" property="createUser" jdbcType="BIGINT" />
+        <result column="update_user" property="updateUser" jdbcType="BIGINT" />
+        <result column="version" property="version" jdbcType="INTEGER" />
+        <result column="delete_flag" property="deleteFlag" jdbcType="BIT" />
+    </resultMap>
+
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, purchaser_id, height, weight, target, standard_weight, exercise, basal_metabolism, 
+        sport_metabolism, body_fat_rate, fat_need, protein_need, carbohydrate_need, examer, 
+        dream_weight, kcl_need, dream_date, status, create_time, update_time, create_user, 
+        update_user, version, delete_flag
+    </sql>
+
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserHealthExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from t_purchaser_health
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_purchaser_health
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+        delete from t_purchaser_health
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+
+    <delete id="deleteByExample" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserHealthExample" >
+        delete from t_purchaser_health
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+
+    <insert id="insert" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserHealth" >
+        insert into t_purchaser_health (id, purchaser_id, height, 
+            weight, target, standard_weight, 
+            exercise, basal_metabolism, sport_metabolism, 
+            body_fat_rate, fat_need, protein_need, 
+            carbohydrate_need, examer, dream_weight, 
+            kcl_need, dream_date, status, 
+            create_time, update_time, create_user, 
+            update_user, version, delete_flag
+            )
+        values (#{id,jdbcType=BIGINT}, #{purchaserId,jdbcType=BIGINT}, #{height,jdbcType=DECIMAL}, 
+            #{weight,jdbcType=DECIMAL}, #{target,jdbcType=INTEGER}, #{standardWeight,jdbcType=DECIMAL}, 
+            #{exercise,jdbcType=INTEGER}, #{basalMetabolism,jdbcType=DECIMAL}, #{sportMetabolism,jdbcType=DECIMAL}, 
+            #{bodyFatRate,jdbcType=DECIMAL}, #{fatNeed,jdbcType=DECIMAL}, #{proteinNeed,jdbcType=DECIMAL}, 
+            #{carbohydrateNeed,jdbcType=DECIMAL}, #{examer,jdbcType=BIT}, #{dreamWeight,jdbcType=DECIMAL}, 
+            #{kclNeed,jdbcType=DECIMAL}, #{dreamDate,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER}, 
+            #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{createUser,jdbcType=BIGINT}, 
+            #{updateUser,jdbcType=BIGINT}, #{version,jdbcType=INTEGER}, #{deleteFlag,jdbcType=BIT}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserHealth" >
+        insert into t_purchaser_health
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                id,
+            </if>
+            <if test="purchaserId != null" >
+                purchaser_id,
+            </if>
+            <if test="height != null" >
+                height,
+            </if>
+            <if test="weight != null" >
+                weight,
+            </if>
+            <if test="target != null" >
+                target,
+            </if>
+            <if test="standardWeight != null" >
+                standard_weight,
+            </if>
+            <if test="exercise != null" >
+                exercise,
+            </if>
+            <if test="basalMetabolism != null" >
+                basal_metabolism,
+            </if>
+            <if test="sportMetabolism != null" >
+                sport_metabolism,
+            </if>
+            <if test="bodyFatRate != null" >
+                body_fat_rate,
+            </if>
+            <if test="fatNeed != null" >
+                fat_need,
+            </if>
+            <if test="proteinNeed != null" >
+                protein_need,
+            </if>
+            <if test="carbohydrateNeed != null" >
+                carbohydrate_need,
+            </if>
+            <if test="examer != null" >
+                examer,
+            </if>
+            <if test="dreamWeight != null" >
+                dream_weight,
+            </if>
+            <if test="kclNeed != null" >
+                kcl_need,
+            </if>
+            <if test="dreamDate != null" >
+                dream_date,
+            </if>
+            <if test="status != null" >
+                status,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="createUser != null" >
+                create_user,
+            </if>
+            <if test="updateUser != null" >
+                update_user,
+            </if>
+            <if test="version != null" >
+                version,
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null" >
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="purchaserId != null" >
+                #{purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="height != null" >
+                #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="target != null" >
+                #{target,jdbcType=INTEGER},
+            </if>
+            <if test="standardWeight != null" >
+                #{standardWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="exercise != null" >
+                #{exercise,jdbcType=INTEGER},
+            </if>
+            <if test="basalMetabolism != null" >
+                #{basalMetabolism,jdbcType=DECIMAL},
+            </if>
+            <if test="sportMetabolism != null" >
+                #{sportMetabolism,jdbcType=DECIMAL},
+            </if>
+            <if test="bodyFatRate != null" >
+                #{bodyFatRate,jdbcType=DECIMAL},
+            </if>
+            <if test="fatNeed != null" >
+                #{fatNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="proteinNeed != null" >
+                #{proteinNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="carbohydrateNeed != null" >
+                #{carbohydrateNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="examer != null" >
+                #{examer,jdbcType=BIT},
+            </if>
+            <if test="dreamWeight != null" >
+                #{dreamWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="kclNeed != null" >
+                #{kclNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="dreamDate != null" >
+                #{dreamDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                #{deleteFlag,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countByExample" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserHealthExample" resultType="java.lang.Integer" >
+        select count(*) from t_purchaser_health
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+
+    <update id="updateByExampleSelective" parameterType="map" >
+        update t_purchaser_health
+        <set >
+            <if test="record.id != null" >
+                id = #{record.id,jdbcType=BIGINT},
+            </if>
+            <if test="record.purchaserId != null" >
+                purchaser_id = #{record.purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="record.height != null" >
+                height = #{record.height,jdbcType=DECIMAL},
+            </if>
+            <if test="record.weight != null" >
+                weight = #{record.weight,jdbcType=DECIMAL},
+            </if>
+            <if test="record.target != null" >
+                target = #{record.target,jdbcType=INTEGER},
+            </if>
+            <if test="record.standardWeight != null" >
+                standard_weight = #{record.standardWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="record.exercise != null" >
+                exercise = #{record.exercise,jdbcType=INTEGER},
+            </if>
+            <if test="record.basalMetabolism != null" >
+                basal_metabolism = #{record.basalMetabolism,jdbcType=DECIMAL},
+            </if>
+            <if test="record.sportMetabolism != null" >
+                sport_metabolism = #{record.sportMetabolism,jdbcType=DECIMAL},
+            </if>
+            <if test="record.bodyFatRate != null" >
+                body_fat_rate = #{record.bodyFatRate,jdbcType=DECIMAL},
+            </if>
+            <if test="record.fatNeed != null" >
+                fat_need = #{record.fatNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="record.proteinNeed != null" >
+                protein_need = #{record.proteinNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="record.carbohydrateNeed != null" >
+                carbohydrate_need = #{record.carbohydrateNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="record.examer != null" >
+                examer = #{record.examer,jdbcType=BIT},
+            </if>
+            <if test="record.dreamWeight != null" >
+                dream_weight = #{record.dreamWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="record.kclNeed != null" >
+                kcl_need = #{record.kclNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="record.dreamDate != null" >
+                dream_date = #{record.dreamDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.status != null" >
+                status = #{record.status,jdbcType=INTEGER},
+            </if>
+            <if test="record.createTime != null" >
+                create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.updateTime != null" >
+                update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.createUser != null" >
+                create_user = #{record.createUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.updateUser != null" >
+                update_user = #{record.updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="record.version != null" >
+                version = #{record.version,jdbcType=INTEGER},
+            </if>
+            <if test="record.deleteFlag != null" >
+                delete_flag = #{record.deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByExample" parameterType="map" >
+        update t_purchaser_health
+        set id = #{record.id,jdbcType=BIGINT},
+            purchaser_id = #{record.purchaserId,jdbcType=BIGINT},
+            height = #{record.height,jdbcType=DECIMAL},
+            weight = #{record.weight,jdbcType=DECIMAL},
+            target = #{record.target,jdbcType=INTEGER},
+            standard_weight = #{record.standardWeight,jdbcType=DECIMAL},
+            exercise = #{record.exercise,jdbcType=INTEGER},
+            basal_metabolism = #{record.basalMetabolism,jdbcType=DECIMAL},
+            sport_metabolism = #{record.sportMetabolism,jdbcType=DECIMAL},
+            body_fat_rate = #{record.bodyFatRate,jdbcType=DECIMAL},
+            fat_need = #{record.fatNeed,jdbcType=DECIMAL},
+            protein_need = #{record.proteinNeed,jdbcType=DECIMAL},
+            carbohydrate_need = #{record.carbohydrateNeed,jdbcType=DECIMAL},
+            examer = #{record.examer,jdbcType=BIT},
+            dream_weight = #{record.dreamWeight,jdbcType=DECIMAL},
+            kcl_need = #{record.kclNeed,jdbcType=DECIMAL},
+            dream_date = #{record.dreamDate,jdbcType=TIMESTAMP},
+            status = #{record.status,jdbcType=INTEGER},
+            create_time = #{record.createTime,jdbcType=TIMESTAMP},
+            update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+            create_user = #{record.createUser,jdbcType=BIGINT},
+            update_user = #{record.updateUser,jdbcType=BIGINT},
+            version = #{record.version,jdbcType=INTEGER},
+            delete_flag = #{record.deleteFlag,jdbcType=BIT}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserHealth" >
+        update t_purchaser_health
+        <set >
+            <if test="purchaserId != null" >
+                purchaser_id = #{purchaserId,jdbcType=BIGINT},
+            </if>
+            <if test="height != null" >
+                height = #{height,jdbcType=DECIMAL},
+            </if>
+            <if test="weight != null" >
+                weight = #{weight,jdbcType=DECIMAL},
+            </if>
+            <if test="target != null" >
+                target = #{target,jdbcType=INTEGER},
+            </if>
+            <if test="standardWeight != null" >
+                standard_weight = #{standardWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="exercise != null" >
+                exercise = #{exercise,jdbcType=INTEGER},
+            </if>
+            <if test="basalMetabolism != null" >
+                basal_metabolism = #{basalMetabolism,jdbcType=DECIMAL},
+            </if>
+            <if test="sportMetabolism != null" >
+                sport_metabolism = #{sportMetabolism,jdbcType=DECIMAL},
+            </if>
+            <if test="bodyFatRate != null" >
+                body_fat_rate = #{bodyFatRate,jdbcType=DECIMAL},
+            </if>
+            <if test="fatNeed != null" >
+                fat_need = #{fatNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="proteinNeed != null" >
+                protein_need = #{proteinNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="carbohydrateNeed != null" >
+                carbohydrate_need = #{carbohydrateNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="examer != null" >
+                examer = #{examer,jdbcType=BIT},
+            </if>
+            <if test="dreamWeight != null" >
+                dream_weight = #{dreamWeight,jdbcType=DECIMAL},
+            </if>
+            <if test="kclNeed != null" >
+                kcl_need = #{kclNeed,jdbcType=DECIMAL},
+            </if>
+            <if test="dreamDate != null" >
+                dream_date = #{dreamDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createUser != null" >
+                create_user = #{createUser,jdbcType=BIGINT},
+            </if>
+            <if test="updateUser != null" >
+                update_user = #{updateUser,jdbcType=BIGINT},
+            </if>
+            <if test="version != null" >
+                version = #{version,jdbcType=INTEGER},
+            </if>
+            <if test="deleteFlag != null" >
+                delete_flag = #{deleteFlag,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.coretheorylife.modules.purchaser.entity.TPurchaserHealth" >
+        update t_purchaser_health
+        set purchaser_id = #{purchaserId,jdbcType=BIGINT},
+            height = #{height,jdbcType=DECIMAL},
+            weight = #{weight,jdbcType=DECIMAL},
+            target = #{target,jdbcType=INTEGER},
+            standard_weight = #{standardWeight,jdbcType=DECIMAL},
+            exercise = #{exercise,jdbcType=INTEGER},
+            basal_metabolism = #{basalMetabolism,jdbcType=DECIMAL},
+            sport_metabolism = #{sportMetabolism,jdbcType=DECIMAL},
+            body_fat_rate = #{bodyFatRate,jdbcType=DECIMAL},
+            fat_need = #{fatNeed,jdbcType=DECIMAL},
+            protein_need = #{proteinNeed,jdbcType=DECIMAL},
+            carbohydrate_need = #{carbohydrateNeed,jdbcType=DECIMAL},
+            examer = #{examer,jdbcType=BIT},
+            dream_weight = #{dreamWeight,jdbcType=DECIMAL},
+            kcl_need = #{kclNeed,jdbcType=DECIMAL},
+            dream_date = #{dreamDate,jdbcType=TIMESTAMP},
+            status = #{status,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+            create_user = #{createUser,jdbcType=BIGINT},
+            update_user = #{updateUser,jdbcType=BIGINT},
+            version = #{version,jdbcType=INTEGER},
+            delete_flag = #{deleteFlag,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>

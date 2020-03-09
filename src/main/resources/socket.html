@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var ws = new WebSocket("ws://localhost:9010/shop/socket/order/47c85deda414d68b5ed49c9a06fcbf12");
+    ws.onopen = function (evt) {
+        console.log("Connection open ...");
+    };
+    ws.onmessage = function (event) {
+        console.log("Received Message: " + event.data);
+    };
+    ws.onclose = function (evt) {
+        console.log("Connection closed.");
+    };
+    ws.onerror = function (event) {
+    };
+    ws.addEventListener("error", function (event) {
+    });
+</script>
+</body>
+</html>
