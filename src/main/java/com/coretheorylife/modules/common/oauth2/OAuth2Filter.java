@@ -52,12 +52,15 @@ public class OAuth2Filter extends AuthenticatingFilter {
     protected boolean preHandle(ServletRequest request, ServletResponse response) throws Exception {
         HttpServletRequest httpRequest = WebUtils.toHttp(request);
         HttpServletResponse httpResponse = WebUtils.toHttp(response);
+
         if (httpRequest.getMethod().equals(RequestMethod.OPTIONS.name())) {
             httpResponse.setHeader("Access-control-Allow-Origin", "*");
             httpResponse.setHeader("Access-Control-Allow-Methods", httpRequest.getMethod());
             httpResponse.setHeader("Access-Control-Allow-Headers", httpRequest.getHeader("Access-Control-Request-Headers"));
             httpResponse.setStatus(org.springframework.http.HttpStatus.OK.value());
             LogUtil.debug(OAuth2Filter.class, "OPTIONS 请求");
+            return true;
+        }else if (httpRequest.getMethod().equals(RequestMethod.POST.name()) || httpRequest.getMethod().equals(RequestMethod.GET.name())){
             return true;
         }
         return super.preHandle(request, response);

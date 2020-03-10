@@ -151,4 +151,9 @@
         <!-- 生产环境将请stdout,testfile去掉 -->
         <appender-ref ref="STDOUT" />
     </root>
+
+<!--    <root level="INFO">-->
+<!--        <appender-ref ref="console" />-->
+<!--        <appender-ref ref="FILEINFO" />-->
+<!--    </root>-->
 </configuration>
