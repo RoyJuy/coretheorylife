@@ -1,7 +1,7 @@
 package com.coretheorylife.modules.payment.dao.impl;
 
 import com.coretheorylife.modules.payment.dao.TransactionDao;
-import com.coretheorylife.modules.payment.dao.mapper.TransactionMapper;
+import com.coretheorylife.modules.payment.dao.TransactionMapper;
 import com.coretheorylife.modules.payment.dao.po.TransactionPO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

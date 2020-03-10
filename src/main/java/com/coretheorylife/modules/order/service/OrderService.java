@@ -24,7 +24,7 @@ import java.util.Date;
  * @author zhuhaitao
  * @since 2020-03-09
  */
-@Service
+@Service("nOrderService")
 public class OrderService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
@@ -32,8 +32,7 @@ public class OrderService {
     @Autowired
     private TransactionDao transactionDao;
 
-    @Autowired
-    private TOrderMapper tOrderMapper;
+
 
     public TSingleResult<CreateOrderVO> createOrder(CreateOrderRequest request){
 
@@ -43,18 +42,18 @@ public class OrderService {
 
         String orderId = CommonUtil.generateOID();
 
-        tOrder.setOrderNo(System.currentTimeMillis()+"");
-        tOrder.setPrice(new BigDecimal(0.01));
-        tOrder.setStatus(1);
-        tOrder.setOrder_id(orderId);
-        tOrder.setCreateUser(1L);
-        tOrder.setUpdateUser(1L);
-        tOrder.setCreateTime(new Date());
-        tOrder.setUpdateTime(new Date());
-
-
-
-        tOrderMapper.insert(tOrder);
+//        tOrder.setOrderNo(System.currentTimeMillis()+"");
+//        tOrder.setPrice(new BigDecimal(0.01));
+//        tOrder.setStatus(1);
+//        tOrder.setOrder_id(orderId);
+//        tOrder.setCreateUser(1L);
+//        tOrder.setUpdateUser(1L);
+//        tOrder.setCreateTime(new Date());
+//        tOrder.setUpdateTime(new Date());
+//
+//
+//
+//        tOrderMapper.insert(tOrder);
 
 
         // 创建订单流水

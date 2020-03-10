@@ -1,4 +1,4 @@
-package com.coretheorylife.modules.payment.dao.mapper;
+package com.coretheorylife.modules.payment.dao;
 
 import com.coretheorylife.modules.payment.dao.po.TransactionPO;
 import org.apache.ibatis.annotations.*;

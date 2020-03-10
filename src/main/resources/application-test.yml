@@ -90,3 +90,5 @@ xxl:
       logpath: /home/xxl-job/jobhandler
       logretentiondays: 10
     accessToken:
+
+debug: true
