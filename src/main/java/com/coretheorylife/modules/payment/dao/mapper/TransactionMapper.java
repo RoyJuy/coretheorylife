@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper
 public interface TransactionMapper {
 
-    @Insert("INSERT INTO transaction (id, order_id, transaction_number, client_id, transaction_status, amount, create_time, update_time, is_deleted) VALUES (#{po.id}, #{po.order_id}, #{po.transaction_number}, #{po.client_id}, #{po.transaction_status}, #{po.amount}, #{po.create_time}, #{po.update_time}, #{po.is_deleted})")
+    @Insert("INSERT INTO t_transaction (id, order_id, transaction_number, client_id, transaction_status, amount, create_time, update_time, is_deleted) VALUES (#{po.id}, #{po.order_id}, #{po.transaction_number}, #{po.client_id}, #{po.transaction_status}, #{po.amount}, #{po.create_time}, #{po.update_time}, #{po.is_deleted})")
     Integer create(@Param("po") TransactionPO transactionPO);
 
     @Update("UPDATE transaction set is_deleted = 1 WHERE id=#{id}")

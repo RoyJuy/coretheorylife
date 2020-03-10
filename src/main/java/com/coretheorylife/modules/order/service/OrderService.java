@@ -6,6 +6,7 @@ import com.coretheorylife.common.utils.TSingleResult;
 import com.coretheorylife.modules.order.request.CreateOrderRequest;
 import com.coretheorylife.modules.order.vo.CreateOrderVO;
 import com.coretheorylife.modules.payment.dao.TransactionDao;
+import com.coretheorylife.modules.payment.dao.mapper.TransactionMapper;
 import com.coretheorylife.modules.payment.dao.po.TransactionPO;
 import com.coretheorylife.modules.shop.dao.TOrderMapper;
 import com.coretheorylife.modules.shop.entity.TOrder;
@@ -33,6 +34,9 @@ public class OrderService {
     private TransactionDao transactionDao;
 
     @Autowired
+    private TransactionMapper transactionMapper;
+
+    @Autowired
     private TOrderMapper tOrderMapper;
 
     public TSingleResult<CreateOrderVO> createOrder(CreateOrderRequest request){
@@ -51,6 +55,8 @@ public class OrderService {
         tOrder.setUpdateUser(1L);
         tOrder.setCreateTime(new Date());
         tOrder.setUpdateTime(new Date());
+        tOrder.setVersion(1);
+        tOrder.setDeleteFlag(false);
 
 
 
@@ -63,7 +69,7 @@ public class OrderService {
         transactionPO.setOrder_id(orderId);
         transactionPO.setId(transactionId);
         transactionPO.setTransaction_number(transactionId);
-        transactionDao.create(transactionPO);
+        transactionMapper.create(transactionPO);
 
         CreateOrderVO createOrderVO = new CreateOrderVO();
         createOrderVO.setOrderNumber(orderId);

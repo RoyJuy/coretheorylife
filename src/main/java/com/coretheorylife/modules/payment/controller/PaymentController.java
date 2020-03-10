@@ -31,9 +31,9 @@ public class PaymentController {
 
     @AuthIgnore
     @RequestMapping(value = "/v1/payment/pay", method = RequestMethod.GET)
-    public String payOrder(@RequestParam String orderNo){
+    public String payOrder(@RequestParam(value = "transactionNo") String transactionNo){
         try {
-            return paymentService.pay(orderNo);
+            return paymentService.pay(transactionNo);
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }

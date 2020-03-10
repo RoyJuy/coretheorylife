@@ -25,7 +25,7 @@ public class OrderController {
     private OrderService orderService;
 
     @RequestMapping(value = "/v1/orders/order_create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    private TSingleResult<CreateOrderVO> createOrder(@RequestBody CreateOrderRequest request){
+    public TSingleResult<CreateOrderVO> createOrder(@RequestBody CreateOrderRequest request){
         return orderService.createOrder(request);
     }
 }
