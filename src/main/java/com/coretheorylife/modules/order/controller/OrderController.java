@@ -1,5 +1,6 @@
 package com.coretheorylife.modules.order.controller;
 
+import com.coretheorylife.common.utils.Result;
 import com.coretheorylife.common.utils.TSingleResult;
 import com.coretheorylife.modules.order.request.CreateOrderRequest;
 import com.coretheorylife.modules.order.service.OrderService;
@@ -28,7 +29,7 @@ public class OrderController {
 
 
     @RequestMapping(value = "/v1/orders/order_create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public TSingleResult<CreateOrderVO> createOrder(@RequestBody CreateOrderRequest request){
+    public Result createOrder(@RequestBody CreateOrderRequest request){
         return orderService.createOrder(request);
     }
 }

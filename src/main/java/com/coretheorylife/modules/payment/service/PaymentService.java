@@ -7,6 +7,7 @@ import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.domain.AlipayTradeAppPayModel;
 import com.alipay.api.request.AlipayTradeAppPayRequest;
 import com.alipay.api.response.AlipayTradeAppPayResponse;
+import com.coretheorylife.common.utils.Result;
 import org.apache.commons.lang3.CharSetUtils;
 import org.bouncycastle.util.encoders.UTF8;
 import org.springframework.stereotype.Service;
@@ -21,7 +22,7 @@ import java.nio.charset.CharsetDecoder;
  */
 @Service
 public class PaymentService {
-    public String pay( String orderNo) throws AlipayApiException {
+    public Result pay(String orderNo) throws AlipayApiException {
 //构造client
         CertAlipayRequest certAlipayRequest = new CertAlipayRequest();
 //设置网关地址
@@ -60,12 +61,12 @@ public class PaymentService {
         try {
             //这里和普通的接口调用不同，使用的是sdkExecute
             AlipayTradeAppPayResponse response = alipayClient.sdkExecute(request);
-            System.out.println(response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
-            return response.getBody();
+//            System.out.println(response.getBody());//就是orderString 可以直接给客户端请求，无需再做处理。
+            return Result.ok(response.getBody());
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }
-        return "failed";
+        return Result.failAtServer("server error");
     }
 
 }

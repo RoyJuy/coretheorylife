@@ -2,6 +2,7 @@ package com.coretheorylife.modules.payment.controller;
 
 import com.alipay.api.AlipayApiException;
 import com.coretheorylife.common.annotation.AuthIgnore;
+import com.coretheorylife.common.utils.Result;
 import com.coretheorylife.modules.payment.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
@@ -31,12 +32,12 @@ public class PaymentController {
 
     @AuthIgnore
     @RequestMapping(value = "/v1/payment/pay", method = RequestMethod.GET)
-    public String payOrder(@RequestParam(value = "transactionNo") String transactionNo){
+    public Result payOrder(@RequestParam(value = "transactionNo") String transactionNo){
         try {
             return paymentService.pay(transactionNo);
         } catch (AlipayApiException e) {
             e.printStackTrace();
         }
-        return "failed";
+        return Result.failAtServer("server error ");
     }
 }

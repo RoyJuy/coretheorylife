@@ -1,6 +1,7 @@
 package com.coretheorylife.modules.order.service;
 
 import com.coretheorylife.common.utils.CommonUtil;
+import com.coretheorylife.common.utils.Result;
 import com.coretheorylife.common.utils.ResultBuilder;
 import com.coretheorylife.common.utils.TSingleResult;
 import com.coretheorylife.modules.order.request.CreateOrderRequest;
@@ -39,7 +40,7 @@ public class OrderService {
     @Autowired
     private TOrderMapper tOrderMapper;
 
-    public TSingleResult<CreateOrderVO> createOrder(CreateOrderRequest request){
+    public Result createOrder(CreateOrderRequest request){
 
         // 创建订单表
 
@@ -75,7 +76,7 @@ public class OrderService {
         createOrderVO.setOrderNumber(orderId);
         createOrderVO.setTransactionNumber(transactionId);
 
-        return ResultBuilder.succTSingle(createOrderVO);
+        return Result.ok(createOrderVO);
 
 
 
