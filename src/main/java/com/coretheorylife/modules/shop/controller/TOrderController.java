@@ -58,7 +58,7 @@ public class TOrderController extends BaseController {
     @GetMapping("/orderList")
     public Result allList(@RequestParam Map<String, Object> params) {
         params.put("deleteFlag", false);
-        params.put("shopId", getShopId());
+        params.put("userId", getShopId());
         Query query = new Query(params);
         List<ExtTOrder> list = tOrderService.queryListByShopIdOrUserId(query);
         int total = tOrderService.queryTotalByShopIdOrUserId(query);

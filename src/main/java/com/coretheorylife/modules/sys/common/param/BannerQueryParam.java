@@ -10,6 +10,6 @@ import lombok.Data;
  */
 @Data
 public class BannerQueryParam {
-    private String type;
+    private String bannerType;
 
 }

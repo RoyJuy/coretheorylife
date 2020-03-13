@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @EnableRabbit
 @EnableTransactionManagement(order = 100, proxyTargetClass = true)
-@MapperScan(basePackages = {"com.coretheorylife.modules.**.dao", "com.coretheorylife.modules.payment.dao.mapper"})
+@MapperScan(basePackages = {"com.coretheorylife.modules.**.dao", "com.coretheorylife.modules.**.dao.mapper"})
 @SpringBootApplication
 public class CoretheorylifeApplication {
 

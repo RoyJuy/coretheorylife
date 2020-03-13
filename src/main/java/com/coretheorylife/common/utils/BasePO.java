@@ -21,15 +21,15 @@ public abstract class BasePO implements Serializable {
     /**
      * 创建时间
      */
-    protected Date create_time;
+    protected Date createTime;
 
     /**
      * 更新时间
      */
-    protected Date update_time;
+    protected Date updateTime;
 
     /**
      * 是否删除，默认为FALSE
      */
-    protected Boolean is_deleted = Boolean.FALSE;
+    protected Boolean isDeleted = Boolean.FALSE;
 }

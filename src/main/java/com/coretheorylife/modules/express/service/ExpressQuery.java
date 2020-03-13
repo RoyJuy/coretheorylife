@@ -30,7 +30,7 @@ public class ExpressQuery {
 
 
 
-    private static final String appCode = "";
+    private static final String appCode = "dbf184c8a2384be3adfc5fa99f4e0bcd";
 
     public ExpressRouteInfo query(String expressNumber, String type) {
         String host = "https://wuliu.market.alicloudapi.com";
