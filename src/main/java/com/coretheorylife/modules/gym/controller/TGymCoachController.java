@@ -9,6 +9,8 @@ import com.coretheorylife.modules.gym.service.TGymCoachService;
 import com.coretheorylife.modules.purchaser.copier.TPurchaserCopier;
 import com.coretheorylife.modules.purchaser.entity.TPurchaser;
 import com.coretheorylife.modules.purchaser.vo.TPurchaserRVO;
+import com.mchange.lang.LongUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +31,11 @@ public class TGymCoachController extends AbstractController<TGymCoach, TGymCoach
      */
     @WebLog
     @GetMapping("/list")
-    public Result list() {
-        List<TPurchaser> list = tGymCoachService.selectCoachListByGymId(getGymId());
+    public Result list(@RequestParam(value = "gymId", required = false)Long gymId) {
+        if (gymId == null){
+            gymId = getGymId();
+        }
+        List<TPurchaser> list = tGymCoachService.selectCoachListByGymId(gymId);
         List<TPurchaserRVO> result = TPurchaserCopier.INSTANCE.asTPurchaserRVOList(list);
         return Result.ok(result);
     }

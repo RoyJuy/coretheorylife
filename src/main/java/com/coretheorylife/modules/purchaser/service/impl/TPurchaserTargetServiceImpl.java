@@ -44,6 +44,9 @@ public class TPurchaserTargetServiceImpl extends BaseServiceImpl<TPurchaserTarge
     public int update(TPurchaserTarget t) {
         t.setUpdateTime(new Date());
         t.setUpdateUser(t.getPurchaserId());
+        if (t.getLasttime() != null) {
+            t.setLasttime(t.getLasttime());
+        }
         return tPurchaserTargetMapper.updateByPrimaryKeySelective(t);
     }
 

@@ -88,6 +88,10 @@ public class TPurchaserTargetController extends AbstractController<TPurchaserTar
     @WebLog
     @PostMapping("/saveLog/{targetId}")
     public Result saveLog(@PathVariable(value = "targetId") Long targetId) {
+        TPurchaserTarget target = new TPurchaserTarget();
+        target.setId(targetId);
+        target.setLasttime(new Date());
+        tPurchaserTargetService.update(target);
         tPurchaserTargetLogService.save(targetId, getPurchaserId());
         return Result.ok();
     }
