@@ -1,5 +1,6 @@
 package com.coretheorylife.modules.gym.controller;
 
+import com.coretheorylife.common.annotation.AuthIgnore;
 import com.coretheorylife.common.annotation.WebLog;
 import com.coretheorylife.common.utils.Result;
 import com.coretheorylife.modules.common.controller.AbstractController;
@@ -31,11 +32,26 @@ public class TGymCoachController extends AbstractController<TGymCoach, TGymCoach
      */
     @WebLog
     @GetMapping("/list")
+    @AuthIgnore
     public Result list(@RequestParam(value = "gymId", required = false)Long gymId) {
         if (gymId == null){
             gymId = getGymId();
         }
         List<TPurchaser> list = tGymCoachService.selectCoachListByGymId(gymId);
+        List<TPurchaserRVO> result = TPurchaserCopier.INSTANCE.asTPurchaserRVOList(list);
+        return Result.ok(result);
+    }
+
+    /**
+     * 查询我的教练列表
+     *
+     * @return
+     */
+    @WebLog
+    @GetMapping("/list1")
+    public Result list1() {
+
+        List<TPurchaser> list = tGymCoachService.selectCoachListByGymId(getGymId());
         List<TPurchaserRVO> result = TPurchaserCopier.INSTANCE.asTPurchaserRVOList(list);
         return Result.ok(result);
     }
