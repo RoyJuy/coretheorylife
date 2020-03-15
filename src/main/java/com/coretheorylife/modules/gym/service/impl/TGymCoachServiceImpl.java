@@ -12,6 +12,7 @@ import com.coretheorylife.modules.gym.entity.TGymCoachExample;
 import com.coretheorylife.modules.gym.entity.ext.ExtTGymCoach;
 import com.coretheorylife.modules.gym.service.TGymCoachService;
 import com.coretheorylife.modules.gym.service.TGymService;
+import com.coretheorylife.modules.purchaser.dao.CoachTagMapper;
 import com.coretheorylife.modules.purchaser.entity.TPurchaser;
 import com.coretheorylife.modules.purchaser.entity.TPurchaserCoachGym;
 import com.coretheorylife.modules.purchaser.entity.TPurchaserCoachGymLog;
@@ -50,6 +51,9 @@ public class TGymCoachServiceImpl extends BaseServiceImpl<TGymCoach, TGymCoachEx
 
     @Autowired
     private TPurchaserCoachGymLogService tPurchaserCoachGymLogService;
+
+    @Autowired
+    private CoachTagMapper coachTagMapper;
 
     @Override
     public int save(TGymCoach t) {

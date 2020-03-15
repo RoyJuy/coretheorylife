@@ -14,7 +14,7 @@
     </resultMap>
 
     <select id="selectCoachListByGymId" resultMap="BaseResultMap">
-        SELECT tp.nick_name, tp.id FROM t_purchaser AS tp
+        SELECT tp.* FROM t_purchaser AS tp
         INNER JOIN (SELECT coach_id FROM t_gym_coach WHERE gym_id = #{gymId} AND delete_flag = FALSE GROUP BY coach_id) AS temp ON temp.coach_id = tp.id
         WHERE delete_flag = FALSE AND status = 1
     </select>

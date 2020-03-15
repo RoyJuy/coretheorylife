@@ -1,7 +1,12 @@
 package com.coretheorylife.modules.purchaser.vo;
 
-import java.util.Date;
+import com.coretheorylife.modules.purchaser.entity.CoachTagPO;
+import lombok.Data;
 
+import java.util.Date;
+import java.util.List;
+
+@Data
 public class TPurchaserRVO {
     /**
      * 主键id
@@ -97,6 +102,10 @@ public class TPurchaserRVO {
      * 是否已经绑定教练
      */
     private Boolean haveCoach;
+
+    private List<CoachTagPO> tags;
+
+    private List<CoachTagPO> advantages;
 
     public Boolean getHaveGym() {
         return haveGym;
