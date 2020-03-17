@@ -87,11 +87,14 @@ public class PurchaserShopCartService {
         Map<Long, ShopCartInfo> stringShopCartInfoMap = shopCartInfos.stream().collect(Collectors.toMap(ShopCartInfo::getGoodsId, ShopCartInfo->ShopCartInfo));
 
         List<ShopCartVo> shopCartVos = new ArrayList<>();
-        
+
         for (ShopInfo shopInfo : shopInfos){
             ShopCartVo shopCartVo = new ShopCartVo();
-            shopCartVo.setNumber(stringShopCartInfoMap.get(goodsInfoMap.get(shopInfo.getId()).get(0).getId()).getNumber());
-            shopCartVo.setId(stringShopCartInfoMap.get(goodsInfoMap.get(shopInfo.getId()).get(0).getId()).getId());
+
+            goodsInfoMap.get(shopInfo.getId()).forEach(goodsInfo -> {
+                goodsInfo.setShopCartId(stringShopCartInfoMap.get(goodsInfo.getId()).getId());
+                goodsInfo.setNumber(stringShopCartInfoMap.get(goodsInfo.getId()).getNumber());
+            });
 
             shopCartVo.setGoodsInfos(goodsInfoMap.get(shopInfo.getId()));
             shopCartVo.setShopInfo(shopInfo);

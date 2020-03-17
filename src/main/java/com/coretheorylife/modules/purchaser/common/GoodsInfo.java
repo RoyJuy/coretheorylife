@@ -12,6 +12,11 @@ import java.math.BigDecimal;
  */
 @Data
 public class GoodsInfo {
+
+    private Integer number;
+
+    private long shopCartId;
+
     private long id;
 
     private long shopId;

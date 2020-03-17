@@ -14,7 +14,9 @@ import java.util.List;
  * @since 2020-03-16
  */
 @Data
-public class ShopCartVo extends ShopCartInfo {
+public class ShopCartVo  {
+
+
     private List<GoodsInfo> goodsInfos;
 
     private ShopInfo shopInfo;
