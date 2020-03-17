@@ -23,9 +23,11 @@ public class BannerController {
     private BannerMapper bannerMapper;
 
     @RequestMapping(value = "/v1/sys/banners", method = RequestMethod.GET)
-    public Result findBanner(@RequestParam(value = "bannerType") BannerTypeEnum bannerType) {
+    public Result findBanner(@RequestParam(value = "bannerType") BannerTypeEnum bannerType,
+                             @RequestParam(value = "refId",required = false)String refId) {
         BannerQueryParam param = new BannerQueryParam();
         param.setBannerType(bannerType.name());
+        param.setRefId(refId);
         return Result.ok(bannerMapper.findAll(param, null));
     }
 

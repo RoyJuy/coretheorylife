@@ -12,4 +12,5 @@ import lombok.Data;
 public class BannerQueryParam {
     private String bannerType;
 
+    private String refId;
 }

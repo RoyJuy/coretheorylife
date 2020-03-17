@@ -21,7 +21,7 @@ public class PurchaserShopCartController extends BaseController {
     @Autowired
     private PurchaserShopCartService purchaserShopCartService;
 
-    @RequestMapping(value = "/v1/purchaser_shop_carts", method = RequestMethod.GET)
+    @RequestMapping(value = "/purchaser/shop_carts", method = RequestMethod.GET)
     public Result findPurchaserShopCarts(){
         return Result.ok(purchaserShopCartService.findShopCartByPurchaserId(getPurchaserId()));
     }

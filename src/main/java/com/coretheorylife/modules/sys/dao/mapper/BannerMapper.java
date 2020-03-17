@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper
 public interface BannerMapper {
 
-    @Insert("INSERT INTO t_banner (id, banner_type, url, description, sort) VALUES (#{po.id}, #{po.bannerType}, #{po.url}, #{po.description}, #{po.sort})")
+    @Insert("INSERT INTO t_banner (id, ref_id, banner_type, url, description, sort) VALUES (#{po.id}, #{po.refId}, #{po.bannerType}, #{po.url}, #{po.description}, #{po.sort})")
     Integer create(@Param("po") BannerPO bannerPO);
 
     @Update("UPDATE t_banner set is_deleted = 1 WHERE id=#{id}")
@@ -39,6 +39,7 @@ public interface BannerMapper {
     @Select("<script>" +
             "SELECT id, create_time as createTime, update_time as updateTime, banner_type as bannerType, url, description, sort FROM t_banner WHERE is_deleted = 0 " +
             "<if test='param.bannerType != null'> and banner_type = #{param.bannerType}</if>" +
+            "<if test='param.refId != null'> and ref_id = #{param.refId}</if>" +
             "<if test=' page != null and page.sortingConditions != null and !page.sortingConditions.isEmpty()'> " +
             "order by " +
             "<foreach item='item' index='index' collection='page.sortingConditions' separator=','> ${item.fieldName} ${item.sortingMethod}</foreach>" +

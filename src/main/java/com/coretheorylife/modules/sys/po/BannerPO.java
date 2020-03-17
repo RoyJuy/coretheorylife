@@ -15,4 +15,5 @@ public class BannerPO extends BasePO {
     private String url;
     private String description;
     private int sort;
+    private Integer refId;
 }
