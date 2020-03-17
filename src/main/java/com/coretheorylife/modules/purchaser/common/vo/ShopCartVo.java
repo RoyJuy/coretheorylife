@@ -5,6 +5,8 @@ import com.coretheorylife.modules.purchaser.common.ShopCartInfo;
 import com.coretheorylife.modules.purchaser.common.ShopInfo;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * ShopCartVo
  *
@@ -13,7 +15,7 @@ import lombok.Data;
  */
 @Data
 public class ShopCartVo extends ShopCartInfo {
-    private GoodsInfo goodsInfo;
+    private List<GoodsInfo> goodsInfos;
 
     private ShopInfo shopInfo;
 }

@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
@@ -71,10 +72,10 @@ public class PurchaserShopCartService {
             return Collections.emptyList();
         }
 
-        Map<Long, GoodsInfo> goodsInfoMap = null;
+        Map<Long, List<GoodsInfo>> goodsInfoMap = null;
 
         if (!CollectionUtils.isEmpty(goodsInfos)) {
-            goodsInfoMap = goodsInfos.stream().collect(Collectors.toMap(GoodsInfo::getId, GoodsInfo -> GoodsInfo));
+            goodsInfoMap = goodsInfos.stream().collect(Collectors.groupingBy(GoodsInfo::getShopId));
         }
 
         Map<Long, ShopInfo> shopInfoMap = null;
@@ -83,15 +84,17 @@ public class PurchaserShopCartService {
             shopInfoMap = shopInfos.stream().collect(Collectors.toMap(ShopInfo::getId, ShopInfo -> ShopInfo));
         }
 
+        Map<Long, ShopCartInfo> stringShopCartInfoMap = shopCartInfos.stream().collect(Collectors.toMap(ShopCartInfo::getGoodsId, ShopCartInfo->ShopCartInfo));
+
         List<ShopCartVo> shopCartVos = new ArrayList<>();
-
-        for (ShopCartInfo shopCartInfo : shopCartInfos) {
+        
+        for (ShopInfo shopInfo : shopInfos){
             ShopCartVo shopCartVo = new ShopCartVo();
-            shopCartVo.setNumber(shopCartInfo.getNumber());
-            shopCartVo.setId(shopCartInfo.getId());
+            shopCartVo.setNumber(stringShopCartInfoMap.get(goodsInfoMap.get(shopInfo.getId()).get(0).getId()).getNumber());
+            shopCartVo.setId(stringShopCartInfoMap.get(goodsInfoMap.get(shopInfo.getId()).get(0).getId()).getId());
 
-            shopCartVo.setGoodsInfo(goodsInfoMap.get(shopCartInfo.getGoodsId()));
-            shopCartVo.setShopInfo(shopInfoMap.get(goodsInfoMap.get(shopCartInfo.getGoodsId()).getShopId()));
+            shopCartVo.setGoodsInfos(goodsInfoMap.get(shopInfo.getId()));
+            shopCartVo.setShopInfo(shopInfo);
             shopCartVos.add(shopCartVo);
         }
 
