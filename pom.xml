@@ -41,7 +41,7 @@
         <!--支付插件-->
         <pay.version>2.10.1</pay.version>
 
-        <springboot.RELEASE>2.1.1.RELEASE</springboot.RELEASE>
+        <springboot.RELEASE>2.5.12</springboot.RELEASE>
 
     </properties>
 
